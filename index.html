@@ -3,200 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PROTOCOLO VIRTUDES | Interface Adaptativa</title>
+    <title>QG GROVE SAMURAY | Experiência Exclusiva</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
-        /* --- ESTÉTICA CYBERPUNK V7 (ADAPTATIVA) --- */
+        /* --- ESTÉTICA PREMIUM (V8 SEDUÇÃO) --- */
         :root {
-            --bg-color: #050505;
-            --cyan: #00f3ff;
-            --purple: #bc13fe;
-            --green: #0f0;
-            --text-color: #e0e0e0;
-            --font-main: 'Courier New', Courier, monospace;
+            --bg-dark: #0a0a0a;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+            --accent: #8A2BE2; /* Roxo Real (Premium) */
+            --highlight: #00d4ff; /* Azul Moderno */
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
         }
 
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            background-color: var(--bg-color);
-            background-image: 
-                linear-gradient(rgba(188, 19, 254, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(188, 19, 254, 0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
-            color: var(--text-color);
-            font-family: var(--font-main);
-            margin: 0; padding: 0;
-            display: flex; flex-direction: column; align-items: center;
+            background-color: var(--bg-dark);
+            /* Gradiente suave e elegante no fundo */
+            background-image: radial-gradient(circle at top right, #1a0b2e 0%, transparent 40%),
+                              radial-gradient(circle at bottom left, #051820 0%, transparent 40%);
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-main);
             min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* --- CABEÇALHO INTELIGENTE --- */
-        .system-log {
-            width: 100%;
-            background: #000;
-            border-bottom: 1px solid var(--cyan);
-            padding: 10px;
-            font-size: 0.7rem;
-            color: var(--cyan);
-            text-align: center;
-            position: fixed; top: 0; z-index: 1000;
-            box-shadow: 0 5px 15px rgba(0, 243, 255, 0.1);
+            display: flex; flex-direction: column; align-items: center;
         }
 
         .container {
-            max-width: 900px; width: 100%;
-            padding: 80px 20px 100px 20px; /* Padding top compensa o header fixo */
-            display: flex; flex-direction: column; gap: 40px;
+            max-width: 500px; width: 100%;
+            padding: 20px;
+            display: flex; flex-direction: column; gap: 30px;
+            padding-bottom: 100px;
         }
 
-        /* LAYOUT HÍBRIDO (PC = Lado a Lado / Mobile = Pilha) */
-        @media (min-width: 768px) {
-            .hero-wrapper {
-                display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
-            }
-            .timeline { margin-top: 0; }
+        /* --- HEADER SEDUTOR --- */
+        .header {
+            text-align: center; margin-top: 40px;
+            animation: fadeIn 1.5s ease;
         }
 
-        /* HERO SECTION */
-        .hero-content { text-align: left; }
-        
+        .brand-tag {
+            background: rgba(138, 43, 226, 0.15); color: var(--accent);
+            padding: 5px 15px; border-radius: 50px; font-size: 0.7rem;
+            font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+            display: inline-block; margin-bottom: 15px;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+        }
+
         h1 {
-            font-size: 2.5rem; line-height: 1.1; margin-bottom: 10px;
-            background: linear-gradient(90deg, #fff, var(--cyan));
+            font-size: 2.2rem; font-weight: 700; letter-spacing: -1px;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, #b3b3b3);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        .typing-text {
-            color: var(--purple); font-weight: bold; font-size: 1rem;
-            border-right: 2px solid var(--purple);
-            animation: blinkCursor 0.7s infinite;
-        }
-        @keyframes blinkCursor { 50% { border-color: transparent; } }
-
-        .glitch-img {
-            width: 100%; border-radius: 12px; border: 1px solid #333;
-            box-shadow: 0 0 20px rgba(188, 19, 254, 0.2);
-            transition: 0.5s;
-        }
-        .glitch-img:hover { filter: hue-rotate(45deg); }
-
-        /* --- TIMELINE DE DIÁLOGO --- */
-        .timeline { position: relative; padding-left: 20px; }
-        .timeline::before {
-            content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
-            background: var(--cyan);
+        .subtitle {
+            font-size: 1rem; color: var(--text-muted); line-height: 1.6; font-weight: 300;
         }
 
-        .card {
-            background: rgba(10, 10, 10, 0.8); border: 1px solid #333;
-            border-left: 4px solid var(--purple);
-            padding: 20px; margin-bottom: 20px; border-radius: 0 8px 8px 0;
-            opacity: 0; transform: translateX(-20px); /* Começa invisível */
-            transition: all 0.6s ease-out;
+        /* --- CARDS DE VIDRO (GLASSMORPHISM) --- */
+        .feature-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex; align-items: center; gap: 20px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, background 0.3s;
+            cursor: default;
         }
-        
-        /* Classe que o JS adiciona para aparecer */
-        .card.visible { opacity: 1; transform: translateX(0); }
 
-        .card h3 { margin: 0 0 10px 0; color: #fff; font-size: 1.1rem; }
-        .card p { margin: 0; font-size: 0.9rem; color: #aaa; line-height: 1.5; }
-
-        /* --- FORMULÁRIO TÁTICO --- */
-        .form-box {
-            background: #080808; padding: 30px; border-radius: 12px;
-            border: 1px dashed var(--green); position: relative;
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--accent);
         }
-        .form-box::after {
-            content: 'SECURE CONNECTION'; position: absolute; bottom: -10px; right: 20px;
-            background: #000; color: var(--green); font-size: 0.6rem; padding: 0 5px;
+
+        .icon-box {
+            width: 50px; height: 50px;
+            background: linear-gradient(135deg, var(--accent), #4b0082);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; color: #fff;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+        }
+
+        .card-text h3 { font-size: 1rem; margin-bottom: 4px; }
+        .card-text p { font-size: 0.8rem; color: var(--text-muted); }
+
+        /* --- FORMULÁRIO LIMPO --- */
+        .form-section {
+            background: #111;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .form-title { font-size: 1.1rem; margin-bottom: 20px; font-weight: 600; }
+
+        .input-group {
+            position: relative; margin-bottom: 15px; text-align: left;
+        }
+
+        .input-group label {
+            font-size: 0.7rem; color: var(--text-muted); margin-left: 10px;
+            margin-bottom: 5px; display: block;
         }
 
         input {
-            width: 100%; background: #000; border: 1px solid #333; color: #fff;
-            padding: 15px; margin-bottom: 15px; font-family: var(--font-main);
-            transition: 0.3s;
+            width: 100%; padding: 16px;
+            background: #1a1a1a; border: 1px solid #333;
+            border-radius: 12px; color: #fff; font-size: 1rem;
+            transition: 0.3s; font-family: 'Montserrat', sans-serif;
         }
-        input:focus { border-color: var(--green); box-shadow: 0 0 10px rgba(0, 255, 0, 0.2); outline: none; }
+
+        input:focus {
+            outline: none; border-color: var(--accent); background: #222;
+        }
 
         button {
-            width: 100%; background: var(--green); color: #000; padding: 18px; border: none;
-            font-weight: 900; text-transform: uppercase; cursor: pointer;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.4); font-size: 1.1rem;
+            width: 100%; padding: 18px; margin-top: 10px;
+            background: linear-gradient(90deg, var(--accent), #6a0dad);
+            color: white; border: none; border-radius: 12px;
+            font-size: 1rem; font-weight: 700; cursor: pointer;
+            box-shadow: 0 5px 20px rgba(138, 43, 226, 0.3);
+            transition: 0.3s;
         }
 
-        /* --- FOOTER & BOTÃO --- */
+        button:hover { transform: scale(1.02); box-shadow: 0 8px 25px rgba(138, 43, 226, 0.5); }
+
+        /* --- FOOTER & BOTÃO FLUTUANTE --- */
         .footer {
-            margin-top: 50px; font-size: 0.7rem; color: #555; text-align: center;
-            border-top: 1px solid #222; padding-top: 20px; width: 100%;
+            text-align: center; font-size: 0.7rem; color: #444; margin-top: 30px;
         }
 
         .atendbot-float {
-            position: fixed; bottom: 20px; right: 20px; background: #000;
-            border: 1px solid var(--cyan); color: var(--cyan); padding: 10px 20px;
-            border-radius: 50px; font-weight: bold; text-decoration: none;
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3); display: flex; align-items: center; gap: 10px;
-            z-index: 9999;
+            position: fixed; bottom: 20px; right: 20px;
+            background: #fff; color: #000;
+            padding: 12px 20px; border-radius: 30px;
+            font-weight: 600; font-size: 0.9rem;
+            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.2);
+            text-decoration: none; display: flex; align-items: center; gap: 10px;
+            z-index: 100; transition: 0.3s;
         }
 
-        /* Mobile Adjustments */
-        @media (max-width: 768px) {
-            h1 { font-size: 1.8rem; }
-            .hero-wrapper { display: flex; flex-direction: column-reverse; }
+        .atendbot-float:hover { transform: scale(1.05); }
+
+        .status-dot {
+            width: 8px; height: 8px; background: #00d4ff; border-radius: 50%;
+            box-shadow: 0 0 8px #00d4ff;
         }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
     </style>
 </head>
 <body>
 
-    <div class="system-log" id="sysLog">
-        INICIALIZANDO PROTOCOLO...
-    </div>
-
     <div class="container">
         
-        <div class="hero-wrapper">
-            <div class="hero-content">
-                <h1>QG GROVE<br>SAMURAY</h1>
-                <div class="typing-text" id="typingArea"></div>
-                <br>
-                <p style="color: #888; line-height: 1.6;">
-                    O sistema tradicional falhou. A base de operações foi reestabelecida.
-                    Seus dados são a chave para destravar o conteúdo tático.
-                </p>
-            </div>
-            <div>
-                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" class="glitch-img">
+        <div class="header">
+            <span class="brand-tag">TECNOLOGIA DO S SAMURAY</span>
+            <h1>QG GROVE SAMURAY</h1>
+            <p class="subtitle">
+                Conecte-se com a visão. Uma experiência de áudio, mentalidade e networking de alto nível.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon-box"><i class="fas fa-play"></i></div>
+            <div class="card-text">
+                <h3>Álbum Virtudes</h3>
+                <p>Ouça com exclusividade antes do lançamento oficial.</p>
             </div>
         </div>
 
-        <div class="timeline">
-            <div class="card">
-                <h3>01 // ÁLBUM VIRTUDES</h3>
-                <p>O som que reprograma a mente. Acesso antecipado liberado para membros.</p>
-            </div>
-            <div class="card">
-                <h3>02 // ATENDBOT IA</h3>
-                <p>Tecnologia própria. Entenda como a automação do Samuray domina o campo.</p>
-            </div>
-            <div class="card">
-                <h3>03 // NETWORKING</h3>
-                <p>Conexão criptografada com quem está jogando o jogo de verdade.</p>
+        <div class="feature-card">
+            <div class="icon-box"><i class="fas fa-brain"></i></div>
+            <div class="card-text">
+                <h3>Mentalidade Tática</h3>
+                <p>Conteúdo direto sobre visão de mundo e estratégia.</p>
             </div>
         </div>
 
-        <div class="form-box">
-            <h3 style="color:var(--green); text-align:center; margin-top:0;">/// ALISTAMENTO ///</h3>
+        <div class="feature-card">
+            <div class="icon-box"><i class="fas fa-robot"></i></div>
+            <div class="card-text">
+                <h3>AtendBot System</h3>
+                <p>Experimente a inteligência artificial na prática.</p>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="form-title">Solicitar meu Acesso VIP</div>
             
             <form action="https://formsubmit.co/atendbot@gmail.com" method="POST">
-                <input type="hidden" name="_subject" value="LEAD V7 - CAMALEÃO">
+                <input type="hidden" name="_subject" value="LEAD VIP - V8 SEDUÇÃO">
                 <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://wa.me/5571991755885?text=Protocolo%20iniciado.%20Aguardando%20base.">
+                <input type="hidden" name="_next" value="https://wa.me/5571991755885?text=Ola%20Samuray,%20solicitei%20meu%20acesso%20VIP.">
 
-                <input type="email" name="email" placeholder="E-MAIL DE ACESSO" required>
-                <input type="tel" name="whatsapp" placeholder="WHATSAPP (DDD + NÚMERO)" required>
+                <div class="input-group">
+                    <label>SEU E-MAIL PRINCIPAL</label>
+                    <input type="email" name="email" placeholder="exemplo@email.com" required>
+                </div>
 
-                <button type="submit">INICIAR CONEXÃO</button>
+                <div class="input-group">
+                    <label>WHATSAPP (COM DDD)</label>
+                    <input type="tel" name="whatsapp" placeholder="(71) 99999-9999" required>
+                </div>
+
+                <button type="submit">LIBERAR MINHA VAGA</button>
             </form>
         </div>
 
@@ -206,21 +227,10 @@
 
     </div>
 
-    <a href="https://wa.me/5571991755885?text=Ola%20AtendBot" class="atendbot-float">
-        <i class="fas fa-robot"></i> FALAR COM ATENDBOT
+    <a href="https://wa.me/5571991755885?text=Ola%20AtendBot,%20tenho%20uma%20duvida." class="atendbot-float">
+        <div class="status-dot"></div>
+        Falar com AtendBot
     </a>
 
-    <script>
-        // 1. DETECTOR DE AMBIENTE (O DIÁLOGO)
-        const sysLog = document.getElementById('sysLog');
-        const hour = new Date().getHours();
-        let greeting = hour < 12 ? "BOM DIA" : (hour < 18 ? "BOA TARDE" : "BOA NOITE");
-        
-        // Detecta se é celular ou PC
-        const isMobile = window.innerWidth <= 768;
-        const deviceType = isMobile ? "MOBILE" : "DESKTOP";
-
-        // Escreve no topo da tela
-        sysLog.innerText = `> SISTEMA ONLINE // ${greeting} SAMURAY // INTERFACE: ${deviceType} // CONEXÃO SEGURA`;
-
-        // 2. EFEITO DE DIG
+</body>
+</html>
