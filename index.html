@@ -2,208 +2,382 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIRTUDES | Pré-Lançamento Oficial</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VIRTUDES O.S. | S Samuray</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* ESTÉTICA "ARTISTA PREMIUM" */
+        /* --- NÚCLEO DO SISTEMA VIRTUDES (CSS AVANÇADO) --- */
         :root {
-            --bg-color: #080808;
-            --card-bg: #101010;
-            --gold: #FFD700;       /* Ouro (Valor) */
-            --highlight: #00f3ff;  /* Ciano (Futuro) */
-            --purple: #9d00ff;     /* Roxo (Vibe) */
-            --font-main: 'Montserrat', sans-serif;
+            --void: #050505;
+            --metal: #1a1a1a;
+            --gold: #FFD700;
+            --cyan: #00f3ff;
+            --purple: #bc13fe;
+            --neon-glow: 0 0 10px rgba(0, 243, 255, 0.5);
+            --glass: rgba(20, 20, 20, 0.8);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
 
         body {
-            background-color: var(--bg-color);
-            /* Fundo artístico e sutil */
-            background-image: 
-                radial-gradient(circle at top right, rgba(157, 0, 255, 0.15), transparent 40%),
-                radial-gradient(circle at bottom left, rgba(0, 243, 255, 0.1), transparent 40%);
+            background-color: var(--void);
             color: #fff;
-            font-family: var(--font-main);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            min-height: 100vh;
-            overflow-x: hidden;
-            padding: 20px;
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden; /* App feel */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .container {
-            max-width: 500px; width: 100%;
-            display: flex; flex-direction: column; gap: 20px;
-            animation: fadeIn 1.5s ease;
+        /* FUNDO DE PARTÍCULAS (CANVAS) */
+        #neural-network {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0; opacity: 0.4;
         }
 
-        /* CAPA / HEADER */
-        .hero { text-align: center; margin-bottom: 20px; }
-        
-        .artist-tag {
-            font-size: 0.7rem; letter-spacing: 3px; color: var(--gold);
-            text-transform: uppercase; margin-bottom: 10px; display: block; font-weight: 500;
+        /* INTERFACE PRINCIPAL */
+        .interface-wrapper {
+            position: relative; z-index: 10;
+            width: 100%; max-width: 480px; height: 100%;
+            display: flex; flex-direction: column;
+            background: rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
+            border-left: 1px solid rgba(255,255,255,0.05);
+            border-right: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* HEADER */
+        .top-bar {
+            padding: 20px; text-align: center;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+        }
+
+        .sys-status {
+            font-family: 'Orbitron', sans-serif; font-size: 0.6rem; color: var(--gold);
+            letter-spacing: 2px; margin-bottom: 5px; animation: pulse 2s infinite;
         }
 
         h1 {
-            font-size: 2.8rem; font-weight: 800; line-height: 1; margin-bottom: 15px;
-            background: linear-gradient(to right, #fff, #ccc);
+            font-family: 'Orbitron', sans-serif; font-size: 1.8rem;
+            background: linear-gradient(90deg, #fff, var(--cyan));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(255,255,255,0.1);
+            text-transform: uppercase; letter-spacing: 2px;
         }
 
-        .description {
-            font-size: 1rem; color: #aaa; line-height: 1.6; font-weight: 300;
-        }
-
-        /* CARTÃO DE INSCRIÇÃO (O IMÃ DE LEADS) */
-        .vip-card {
-            background: var(--card-bg);
-            border: 1px solid #222;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        /* ÁREA DE VISUALIZAÇÃO DE ÁUDIO (O IMÃ) */
+        .visualizer-container {
+            flex: 1; display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
             position: relative;
-            overflow: hidden;
         }
 
-        /* Detalhe dourado na borda */
-        .vip-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
-            background: linear-gradient(90deg, var(--purple), var(--highlight));
+        .disc-wrapper {
+            width: 200px; height: 200px; border-radius: 50%;
+            background: conic-gradient(from 0deg, var(--metal), #000);
+            border: 2px solid var(--purple);
+            box-shadow: 0 0 30px rgba(188, 19, 254, 0.2);
+            display: flex; justify-content: center; align-items: center;
+            position: relative;
+            animation: spin 10s linear infinite;
         }
-
-        .form-title {
-            text-align: center; font-size: 0.9rem; text-transform: uppercase;
-            letter-spacing: 1px; color: #fff; margin-bottom: 25px; font-weight: 500;
-        }
-
-        /* CAMPOS DO FORMULÁRIO */
-        .input-group { margin-bottom: 20px; position: relative; }
         
-        .input-icon {
-            position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
-            color: var(--highlight);
+        .disc-art {
+            width: 190px; height: 190px; border-radius: 50%;
+            background: url('https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=1000&auto=format&fit=crop'); /* Arte Abstrata */
+            background-size: cover; opacity: 0.8;
+        }
+
+        .play-btn {
+            position: absolute; width: 60px; height: 60px;
+            background: var(--gold); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            color: #000; font-size: 1.5rem; cursor: pointer;
+            box-shadow: 0 0 20px var(--gold);
+            z-index: 20; transition: transform 0.2s;
+        }
+        .play-btn:active { transform: scale(0.9); }
+
+        /* EQUALIZADOR FAKE */
+        .eq-bars {
+            display: flex; gap: 3px; height: 30px; align-items: flex-end;
+            margin-top: 30px; opacity: 0.5;
+        }
+        .bar { width: 4px; background: var(--cyan); animation: eq 1s infinite ease-in-out; }
+
+        /* CHAT INTERATIVO (A RETENÇÃO) */
+        .chat-interface {
+            height: 350px; background: var(--glass);
+            border-top: 2px solid var(--purple);
+            border-radius: 25px 25px 0 0;
+            padding: 20px; display: flex; flex-direction: column;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.8);
+        }
+
+        .chat-window {
+            flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 15px;
+            padding-bottom: 10px; scroll-behavior: smooth;
+        }
+
+        /* BALÕES DE MENSAGEM */
+        .msg {
+            max-width: 85%; padding: 12px 18px; border-radius: 12px;
+            font-size: 0.9rem; line-height: 1.4; position: relative;
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .bot {
+            align-self: flex-start; background: #222; border-left: 3px solid var(--cyan);
+            color: #ddd; border-bottom-left-radius: 2px;
+        }
+
+        .user {
+            align-self: flex-end; background: linear-gradient(135deg, var(--purple), #6a0dad);
+            color: #fff; border-bottom-right-radius: 2px; box-shadow: 0 5px 15px rgba(188, 19, 254, 0.2);
+        }
+
+        /* ÁREA DE INPUT */
+        .input-area {
+            display: flex; gap: 10px; margin-top: 10px;
         }
 
         input {
-            width: 100%; padding: 18px 18px 18px 45px; /* Espaço pro ícone */
-            background: #050505; border: 1px solid #333; border-radius: 12px;
-            color: #fff; font-family: var(--font-main); font-size: 1rem;
-            transition: 0.3s;
+            flex: 1; background: #111; border: 1px solid #333; color: var(--cyan);
+            padding: 15px; border-radius: 50px; font-family: 'Montserrat', sans-serif;
+            outline: none; transition: 0.3s;
+        }
+        input:focus { border-color: var(--cyan); box-shadow: 0 0 10px rgba(0, 243, 255, 0.1); }
+
+        #send-btn {
+            width: 50px; height: 50px; border-radius: 50%; border: none;
+            background: var(--cyan); color: #000; font-size: 1.2rem;
+            cursor: pointer; transition: 0.3s;
         }
 
-        input:focus {
-            outline: none; border-color: var(--purple);
-            box-shadow: 0 0 15px rgba(157, 0, 255, 0.2);
-        }
+        /* ANIMAÇÕES */
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        @keyframes eq { 0%, 100% { height: 5px; } 50% { height: 100%; } }
 
-        /* BOTÃO DE AÇÃO */
-        button {
-            width: 100%; padding: 20px; border: none; border-radius: 12px;
-            background: linear-gradient(90deg, var(--purple), var(--highlight));
-            color: #000; font-weight: 800; font-size: 1.1rem;
-            text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            margin-top: 10px;
+        /* LOADING OVERLAY */
+        .loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center;
+            flex-direction: column; transition: opacity 1s;
         }
+        .loader-text { color: var(--cyan); font-family: 'Orbitron'; letter-spacing: 3px; margin-top: 20px; }
 
-        button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(157, 0, 255, 0.4);
-            color: #fff;
-        }
-        
-        button:disabled { opacity: 0.7; cursor: wait; }
-
-        /* FOOTER ARTÍSTICO */
-        .footer {
-            text-align: center; margin-top: 30px;
-            font-size: 0.7rem; color: #444; letter-spacing: 2px;
-        }
-
-        /* ANIMAÇÃO DE ENTRADA */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        /* Esconder scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
 
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div class="loader" id="loader">
+        <i class="fas fa-microchip fa-3x fa-spin" style="color:var(--purple)"></i>
+        <div class="loader-text">INICIANDO SISTEMA VIRTUDES...</div>
+    </div>
+
+    <canvas id="neural-network"></canvas>
+
+    <div class="interface-wrapper">
         
-        <div class="hero">
-            <span class="artist-tag">EQINTEC PRODUÇÕES APRESENTA</span>
-            <h1>VIRTUDES</h1>
-            <p class="description">
-                Não é apenas um álbum. É uma nova frequência.<br>
-                Cadastre-se para garantir o <strong>acesso antecipado</strong> ao acervo, artes exclusivas e bastidores do Grove Samuray.
+        <div class="top-bar">
+            <div class="sys-status">/// CONEXÃO SEGURA ESTABELECIDA ///</div>
+            <h1>VIRTUDES <span style="font-size:0.8rem; vertical-align:top; color:var(--gold)">O.S.</span></h1>
+        </div>
+
+        <div class="visualizer-container">
+            <div class="disc-wrapper">
+                <div class="disc-art"></div>
+            </div>
+            <div class="play-btn" onclick="startExperience()">
+                <i class="fas fa-play" id="playIcon"></i>
+            </div>
+            
+            <div class="eq-bars" id="eqBars" style="opacity:0">
+                <div class="bar" style="animation-delay:0.1s"></div>
+                <div class="bar" style="animation-delay:0.3s"></div>
+                <div class="bar" style="animation-delay:0.5s"></div>
+                <div class="bar" style="animation-delay:0.2s"></div>
+                <div class="bar" style="animation-delay:0.4s"></div>
+            </div>
+
+            <p style="margin-top:20px; font-size:0.8rem; color:#888; letter-spacing:1px">
+                "A arte é a única verdade."
             </p>
         </div>
 
-        <div class="vip-card">
-            <div class="form-title">Entre para a Lista VIP</div>
+        <div class="chat-interface">
+            <div class="chat-window" id="chatBox">
+                </div>
             
-            <form id="submit-to-google">
-                
-                <div class="input-group">
-                    <i class="fas fa-envelope input-icon"></i>
-                    <input name="Email" type="email" placeholder="Seu melhor e-mail" required>
-                </div>
-
-                <div class="input-group">
-                    <i class="fas fa-whatsapp input-icon"></i>
-                    <input name="Whatsapp" type="tel" placeholder="Seu WhatsApp (com DDD)" required>
-                </div>
-
-                <button type="submit" id="btnSubmit">LIBERAR MEU ACESSO</button>
-
+            <form id="chatForm" class="input-area" onsubmit="handleInput(event)">
+                <input type="text" id="userInput" placeholder="Digite aqui..." autocomplete="off" disabled>
+                <button type="submit" id="send-btn" disabled><i class="fas fa-paper-plane"></i></button>
             </form>
-        </div>
-
-        <div class="footer">
-            SAMURAY © 2026 // VISÃO & ARTE
         </div>
 
     </div>
 
+    <audio id="bgAudio" loop>
+        </audio>
+
     <script>
-        // --- O MOTOR INVISÍVEL (BACKEND) ---
-        // Aqui está o seu link real que faz a mágica acontecer:
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbwGpbJEhyoghRMydByF-K7LlmVvZod7NeLCXHWEKVM05Y7GtO4bApC_k2MdLNO_W4PYFw/exec';
+        // --- O CÉREBRO DA IA ---
         
-        const form = document.forms['submit-to-google'];
-        const btn = document.getElementById('btnSubmit');
+        // Link do seu Google Script (Já inserido)
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwGpbJEhyoghRMydByF-K7LlmVvZod7NeLCXHWEKVM05Y7GtO4bApC_k2MdLNO_W4PYFw/exec';
+        
+        const chatBox = document.getElementById('chatBox');
+        const userInput = document.getElementById('userInput');
+        const sendBtn = document.getElementById('send-btn');
+        
+        // Dados do Usuário
+        let userData = { Email: '', Whatsapp: '' };
+        let step = 0; // 0 = Início, 1 = Email, 2 = Zap, 3 = Fim
 
-        form.addEventListener('submit', e => {
-            e.preventDefault();
+        // 1. ANIMAÇÃO DE CARREGAMENTO
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => { document.getElementById('loader').style.display = 'none'; }, 1000);
+                addBotMessage("Bem-vindo à frequência do Samuray.");
+                setTimeout(() => addBotMessage("Para desbloquear o álbum VIRTUDES, toque no Play."), 800);
+            }, 1500);
+        }
+
+        // 2. FUNÇÃO PLAY (COMEÇA A EXPERIÊNCIA)
+        function startExperience() {
+            document.getElementById('playIcon').classList.replace('fa-play', 'fa-pause');
+            document.getElementById('eqBars').style.opacity = '1';
+            // document.getElementById('bgAudio').play(); // Descomente se tiver áudio real
             
-            // 1. Efeito Visual de "Reservando Vaga" (Lábia de Retenção)
-            btn.innerHTML = "RESERVANDO SUA VAGA...";
-            btn.style.opacity = "0.8";
-            btn.disabled = true;
+            if(step === 0) {
+                step = 1;
+                setTimeout(() => addBotMessage("Conectando ao banco de dados..."), 500);
+                setTimeout(() => {
+                    addBotMessage("Preciso validar sua identidade. Qual seu melhor **E-MAIL** para envio da arte?");
+                    enableInput();
+                }, 1500);
+            }
+        }
 
-            // 2. Envia os dados pro seu Google Sheets (Sem o cliente ver)
-            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(response => {
-                    // 3. Sucesso! Muda o texto para confirmar
-                    btn.innerHTML = "VAGA CONFIRMADA! 🔒";
-                    btn.style.background = "#25D366"; // Verde Zap
-                    btn.style.color = "#fff";
-                    
-                    // 4. Redireciona para o fechamento no WhatsApp
+        // 3. LÓGICA DO CHAT (A MÁGICA)
+        function handleInput(e) {
+            e.preventDefault();
+            let text = userInput.value.trim();
+            if(!text) return;
+
+            // Mostra mensagem do usuário
+            addUserMessage(text);
+            userInput.value = '';
+            disableInput();
+
+            // Processa a resposta
+            setTimeout(() => {
+                if(step === 1) {
+                    userData.Email = text;
+                    step = 2;
+                    addBotMessage("E-mail registrado.");
                     setTimeout(() => {
-                        window.location.href = "https://wa.me/5571991755885?text=Ola%20Samuray.%20Ja%20estou%20na%20Lista%20VIP.%20Senha:%20VIRTUDES";
-                    }, 1500);
+                        addBotMessage("Agora, informe seu **WHATSAPP (com DDD)** para receber a senha de acesso.");
+                        enableInput();
+                        userInput.type = "tel"; // Muda teclado pro celular
+                    }, 800);
+                } 
+                else if (step === 2) {
+                    userData.Whatsapp = text;
+                    step = 3;
+                    finishRegistration();
+                }
+            }, 800);
+        }
+
+        // 4. ENVIO DE DADOS E FINALIZAÇÃO
+        function finishRegistration() {
+            addBotMessage("Criptografando dados... Aguarde.");
+            
+            // Envia para o Google Sheets
+            let formData = new FormData();
+            formData.append('Email', userData.Email);
+            formData.append('Whatsapp', userData.Whatsapp);
+
+            fetch(SCRIPT_URL, { method: 'POST', body: formData })
+                .then(response => {
+                    addBotMessage("ACESSO AUTORIZADO! 🔓");
+                    addBotMessage("Redirecionando para o canal seguro...");
+                    setTimeout(() => {
+                        window.location.href = "https://wa.me/5571991755885?text=Ola%20Samuray.%20Completei%20o%20Protocolo.%20Senha:%20VIRTUDES";
+                    }, 2000);
                 })
                 .catch(error => {
-                    // Se der erro, manda pro zap igual para não perder a venda
-                    window.location.href = "https://wa.me/5571991755885?text=Ola%20Samuray.%20Quero%20entrar%20na%20Lista%20VIP.";
+                    addBotMessage("Erro na conexão. Redirecionando manualmente.");
+                    setTimeout(() => {
+                        window.location.href = "https://wa.me/5571991755885?text=Erro%20no%20sistema%20mas%20quero%20o%20link.";
+                    }, 2000);
                 });
-        });
-    </script>
+        }
 
+        // AUXILIARES DE CHAT
+        function addBotMessage(text) {
+            const div = document.createElement('div');
+            div.className = 'msg bot';
+            div.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // Negrito
+            chatBox.appendChild(div);
+            scrollToBottom();
+        }
+
+        function addUserMessage(text) {
+            const div = document.createElement('div');
+            div.className = 'msg user';
+            div.innerText = text;
+            chatBox.appendChild(div);
+            scrollToBottom();
+        }
+
+        function scrollToBottom() { chatBox.scrollTop = chatBox.scrollHeight; }
+        function enableInput() { userInput.disabled = false; sendBtn.disabled = false; userInput.focus(); }
+        function disableInput() { userInput.disabled = true; sendBtn.disabled = true; }
+
+        // --- VISUAL DE FUNDO (PARTÍCULAS MATRIX) ---
+        const canvas = document.getElementById('neural-network');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+
+        let particles = [];
+        for(let i=0; i<50; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                size: Math.random() * 2
+            });
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00f3ff';
+            ctx.beginPath();
+            particles.forEach(p => {
+                p.x += p.vx; p.y += p.vy;
+                if(p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if(p.y < 0 || p.y > canvas.height) p.vy *= -1;
+                ctx.moveTo(p.x, p.y);
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+            });
+            ctx.fill();
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+    </script>
 </body>
 </html>
