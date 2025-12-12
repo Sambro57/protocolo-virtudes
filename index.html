@@ -3,151 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QG GROVE SAMURAY | Acesso à Base</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>VIRTUDES | Pré-Lançamento Oficial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* ESTÉTICA V11: ROYAL CYBER DATABASE */
+        /* ESTÉTICA "ARTISTA PREMIUM" */
         :root {
-            --bg-matte: #0a0a0a; --cyan: #00f3ff; --purple: #bc13fe; --gold: #FFD700;
+            --bg-color: #080808;
+            --card-bg: #101010;
+            --gold: #FFD700;       /* Ouro (Valor) */
+            --highlight: #00f3ff;  /* Ciano (Futuro) */
+            --purple: #9d00ff;     /* Roxo (Vibe) */
             --font-main: 'Montserrat', sans-serif;
         }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            background: var(--bg-matte);
-            /* Fundo sutil */
-            background-image: radial-gradient(circle at 50% 0%, rgba(188, 19, 254, 0.1) 0%, transparent 60%);
-            color: #fff; font-family: var(--font-main);
-            display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+            background-color: var(--bg-color);
+            /* Fundo artístico e sutil */
+            background-image: 
+                radial-gradient(circle at top right, rgba(157, 0, 255, 0.15), transparent 40%),
+                radial-gradient(circle at bottom left, rgba(0, 243, 255, 0.1), transparent 40%);
+            color: #fff;
+            font-family: var(--font-main);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding: 20px;
         }
-        .container { max-width: 600px; width: 100%; padding: 20px 20px 100px 20px; }
+
+        .container {
+            max-width: 500px; width: 100%;
+            display: flex; flex-direction: column; gap: 20px;
+            animation: fadeIn 1.5s ease;
+        }
+
+        /* CAPA / HEADER */
+        .hero { text-align: center; margin-bottom: 20px; }
         
-        /* HEADER */
-        .header { text-align: center; margin-top: 40px; margin-bottom: 30px; }
-        .brand { color: var(--gold); font-weight: 800; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 10px; display: inline-block; border-bottom: 1px solid var(--gold); padding-bottom: 5px; }
+        .artist-tag {
+            font-size: 0.7rem; letter-spacing: 3px; color: var(--gold);
+            text-transform: uppercase; margin-bottom: 10px; display: block; font-weight: 500;
+        }
+
         h1 {
-            background: linear-gradient(to right, #fff, var(--cyan)); -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent; font-size: 2.2rem; font-weight: 800; margin: 10px 0;
-            line-height: 1.1;
-        }
-        .subtitle { color: #888; font-size: 0.9rem; line-height: 1.5; }
-
-        /* FORMULÁRIO TÁTICO */
-        .form-box {
-            background: #111; border: 1px solid #333; border-radius: 16px; padding: 30px;
-            box-shadow: 0 0 30px rgba(0, 243, 255, 0.05); position: relative;
-            margin-top: 20px; border-left: 4px solid var(--purple);
-        }
-        
-        .loading-bar {
-            height: 3px; width: 0%; background: var(--cyan); transition: 0.5s;
-            position: absolute; top: 0; left: 0; border-radius: 16px 16px 0 0;
+            font-size: 2.8rem; font-weight: 800; line-height: 1; margin-bottom: 15px;
+            background: linear-gradient(to right, #fff, #ccc);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255,255,255,0.1);
         }
 
-        label { display: block; font-size: 0.7rem; color: var(--cyan); font-weight: bold; margin-bottom: 5px; margin-top: 15px; }
+        .description {
+            font-size: 1rem; color: #aaa; line-height: 1.6; font-weight: 300;
+        }
+
+        /* CARTÃO DE INSCRIÇÃO (O IMÃ DE LEADS) */
+        .vip-card {
+            background: var(--card-bg);
+            border: 1px solid #222;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Detalhe dourado na borda */
+        .vip-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--purple), var(--highlight));
+        }
+
+        .form-title {
+            text-align: center; font-size: 0.9rem; text-transform: uppercase;
+            letter-spacing: 1px; color: #fff; margin-bottom: 25px; font-weight: 500;
+        }
+
+        /* CAMPOS DO FORMULÁRIO */
+        .input-group { margin-bottom: 20px; position: relative; }
         
+        .input-icon {
+            position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+            color: var(--highlight);
+        }
+
         input {
-            width: 100%; background: #000; border: 1px solid #333; color: #fff; padding: 15px;
-            border-radius: 8px; font-family: var(--font-main); font-size: 1rem; transition: 0.3s;
+            width: 100%; padding: 18px 18px 18px 45px; /* Espaço pro ícone */
+            background: #050505; border: 1px solid #333; border-radius: 12px;
+            color: #fff; font-family: var(--font-main); font-size: 1rem;
+            transition: 0.3s;
         }
-        input:focus { outline: none; border-color: var(--cyan); box-shadow: 0 0 10px rgba(0, 243, 255, 0.1); }
-        
+
+        input:focus {
+            outline: none; border-color: var(--purple);
+            box-shadow: 0 0 15px rgba(157, 0, 255, 0.2);
+        }
+
+        /* BOTÃO DE AÇÃO */
         button {
-            width: 100%; padding: 18px; border: none; border-radius: 8px; margin-top: 25px;
-            background: linear-gradient(90deg, var(--cyan), var(--purple));
-            color: #000; font-weight: 800; cursor: pointer; text-transform: uppercase;
-            font-size: 1rem; transition: 0.3s;
+            width: 100%; padding: 20px; border: none; border-radius: 12px;
+            background: linear-gradient(90deg, var(--purple), var(--highlight));
+            color: #000; font-weight: 800; font-size: 1.1rem;
+            text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
         }
-        button:hover { transform: scale(1.02); box-shadow: 0 0 20px rgba(188, 19, 254, 0.4); }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(157, 0, 255, 0.4);
+            color: #fff;
+        }
+        
         button:disabled { opacity: 0.7; cursor: wait; }
 
-        /* FOOTER */
-        .footer { text-align: center; margin-top: 40px; color: #444; font-size: 0.7rem; letter-spacing: 1px; }
-        
-        /* BOTÃO FLUTUANTE */
-        .atendbot-float {
-            position: fixed; bottom: 20px; right: 20px;
-            background: #000; border: 1px solid var(--gold); color: var(--gold);
-            padding: 10px 20px; border-radius: 50px; font-weight: 700; font-size: 0.8rem;
-            text-decoration: none; display: flex; align-items: center; gap: 8px;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2); z-index: 100;
+        /* FOOTER ARTÍSTICO */
+        .footer {
+            text-align: center; margin-top: 30px;
+            font-size: 0.7rem; color: #444; letter-spacing: 2px;
         }
+
+        /* ANIMAÇÃO DE ENTRADA */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div class="header">
-            <div class="brand">EQINTEC SYSTEM</div>
-            <h1>QG GROVE SAMURAY</h1>
-            <p class="subtitle">
-                Conexão criptografada estabelecida.<br>
-                Insira seus dados para liberar o acesso à base.
+        
+        <div class="hero">
+            <span class="artist-tag">EQINTEC PRODUÇÕES APRESENTA</span>
+            <h1>VIRTUDES</h1>
+            <p class="description">
+                Não é apenas um álbum. É uma nova frequência.<br>
+                Cadastre-se para garantir o <strong>acesso antecipado</strong> ao acervo, artes exclusivas e bastidores do Grove Samuray.
             </p>
         </div>
 
-        <div class="form-box">
-            <div class="loading-bar" id="loadBar"></div>
+        <div class="vip-card">
+            <div class="form-title">Entre para a Lista VIP</div>
             
             <form id="submit-to-google">
-                <label>E-MAIL PESSOAL</label>
-                <input name="Email" type="email" placeholder="Para receber os códigos..." required>
+                
+                <div class="input-group">
+                    <i class="fas fa-envelope input-icon"></i>
+                    <input name="Email" type="email" placeholder="Seu melhor e-mail" required>
+                </div>
 
-                <label>WHATSAPP (COM DDD)</label>
-                <input name="Whatsapp" type="tel" placeholder="(71) 99999-9999" required>
+                <div class="input-group">
+                    <i class="fas fa-whatsapp input-icon"></i>
+                    <input name="Whatsapp" type="tel" placeholder="Seu WhatsApp (com DDD)" required>
+                </div>
 
-                <button type="submit" id="btnSubmit">ENVIAR PARA A BASE</button>
+                <button type="submit" id="btnSubmit">LIBERAR MEU ACESSO</button>
+
             </form>
         </div>
 
         <div class="footer">
-            QG GROVE SAMURAY - EQINTEC PRODUÇÕES
+            SAMURAY © 2026 // VISÃO & ARTE
         </div>
+
     </div>
 
-    <a href="https://wa.me/5571991755885?text=Ola%20AtendBot" class="atendbot-float">
-        <i class="fas fa-robot"></i> Suporte AtendBot
-    </a>
-
     <script>
-        // --- O MOTOR DO SISTEMA (CONECTADO AO SEU LINK) ---
-        
-        // Link gerado pelo Samuray:
+        // --- O MOTOR INVISÍVEL (BACKEND) ---
+        // Aqui está o seu link real que faz a mágica acontecer:
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwGpbJEhyoghRMydByF-K7LlmVvZod7NeLCXHWEKVM05Y7GtO4bApC_k2MdLNO_W4PYFw/exec';
         
         const form = document.forms['submit-to-google'];
         const btn = document.getElementById('btnSubmit');
-        const bar = document.getElementById('loadBar');
 
         form.addEventListener('submit', e => {
             e.preventDefault();
             
-            // 1. Feedback Visual Tático
-            btn.innerHTML = "CONECTANDO...";
-            btn.style.background = "#333";
-            btn.style.color = "#fff";
+            // 1. Efeito Visual de "Reservando Vaga" (Lábia de Retenção)
+            btn.innerHTML = "RESERVANDO SUA VAGA...";
+            btn.style.opacity = "0.8";
             btn.disabled = true;
-            bar.style.width = "40%";
 
-            // 2. Envio Silencioso para o Google
+            // 2. Envia os dados pro seu Google Sheets (Sem o cliente ver)
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
                 .then(response => {
-                    // 3. Sucesso
-                    bar.style.width = "100%";
-                    btn.innerHTML = "ACESSO AUTORIZADO ✔️";
-                    btn.style.background = "#00f3ff";
-                    btn.style.color = "#000";
+                    // 3. Sucesso! Muda o texto para confirmar
+                    btn.innerHTML = "VAGA CONFIRMADA! 🔒";
+                    btn.style.background = "#25D366"; // Verde Zap
+                    btn.style.color = "#fff";
                     
-                    // 4. Redirecionamento para o WhatsApp (Delay de 1s para lerem o sucesso)
+                    // 4. Redireciona para o fechamento no WhatsApp
                     setTimeout(() => {
-                        window.location.href = "https://wa.me/5571991755885?text=Ola%20Samuray.%20Cadastro%20confirmado.%20Senha:%20VIRTUDES";
-                    }, 1000);
+                        window.location.href = "https://wa.me/5571991755885?text=Ola%20Samuray.%20Ja%20estou%20na%20Lista%20VIP.%20Senha:%20VIRTUDES";
+                    }, 1500);
                 })
                 .catch(error => {
-                    console.error('Erro!', error.message);
-                    // Se der erro, manda pro zap igual (falha segura)
-                    window.location.href = "https://wa.me/5571991755885?text=Ola%20Samuray.%20Tive%20um%20erro%20no%20site%20mas%20quero%20entrar.";
+                    // Se der erro, manda pro zap igual para não perder a venda
+                    window.location.href = "https://wa.me/5571991755885?text=Ola%20Samuray.%20Quero%20entrar%20na%20Lista%20VIP.";
                 });
         });
     </script>
