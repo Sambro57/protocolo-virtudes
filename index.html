@@ -8,34 +8,34 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- NÚCLEO DO SISTEMA VIRTUDES (CSS AVANÇADO) --- */
+        /* --- NÚCLEO DO SISTEMA VIRTUDES (PALETA CYBER-TOXIC) --- */
         :root {
-            --void: #050505;
-            --metal: #1a1a1a;
-            --gold: #FFD700;
-            --cyan: #00f3ff;
-            --purple: #bc13fe;
+            --void: #050505;    /* Preto Fosco */
+            --metal: #1a1a1a;   /* Cinza Fosco */
+            --gold: #39FF14;    /* MUDADO: Verde Fluorescente (no lugar do dourado) */
+            --cyan: #00f3ff;    /* Azul Ciano Fluorescente */
+            --purple: #00f3ff;  /* MUDADO: Roxo virou Ciano para manter a paleta dupla */
             --neon-glow: 0 0 10px rgba(0, 243, 255, 0.5);
-            --glass: rgba(20, 20, 20, 0.8);
+            --glass: rgba(20, 20, 20, 0.9); /* Mais fosco */
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
 
         body {
             background-color: var(--void);
-            color: #fff;
+            color: #fff; /* Branco Fosco */
             font-family: 'Montserrat', sans-serif;
-            overflow: hidden; /* App feel */
+            overflow: hidden;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* FUNDO DE PARTÍCULAS (CANVAS) */
+        /* FUNDO DE PARTÍCULAS */
         #neural-network {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 0; opacity: 0.4;
+            z-index: 0; opacity: 0.3;
         }
 
         /* INTERFACE PRINCIPAL */
@@ -43,32 +43,33 @@
             position: relative; z-index: 10;
             width: 100%; max-width: 480px; height: 100%;
             display: flex; flex-direction: column;
-            background: rgba(0,0,0,0.2);
+            background: rgba(10, 10, 10, 0.8); /* Fundo mais fosco */
             backdrop-filter: blur(5px);
-            border-left: 1px solid rgba(255,255,255,0.05);
-            border-right: 1px solid rgba(255,255,255,0.05);
+            border-left: 1px solid rgba(255,255,255,0.1);
+            border-right: 1px solid rgba(255,255,255,0.1);
         }
 
         /* HEADER */
         .top-bar {
             padding: 20px; text-align: center;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
-            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+            border-bottom: 1px solid rgba(0, 243, 255, 0.2); /* Ciano */
+            background: linear-gradient(to bottom, rgba(0,0,0,1), transparent);
         }
 
         .sys-status {
-            font-family: 'Orbitron', sans-serif; font-size: 0.6rem; color: var(--gold);
+            font-family: 'Orbitron', sans-serif; font-size: 0.6rem; color: var(--gold); /* Verde */
             letter-spacing: 2px; margin-bottom: 5px; animation: pulse 2s infinite;
         }
 
         h1 {
             font-family: 'Orbitron', sans-serif; font-size: 1.8rem;
+            /* Degradê Branco para Ciano */
             background: linear-gradient(90deg, #fff, var(--cyan));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             text-transform: uppercase; letter-spacing: 2px;
         }
 
-        /* ÁREA DE VISUALIZAÇÃO DE ÁUDIO (O IMÃ) */
+        /* ÁREA VISUALIZER */
         .visualizer-container {
             flex: 1; display: flex; flex-direction: column;
             justify-content: center; align-items: center;
@@ -78,8 +79,8 @@
         .disc-wrapper {
             width: 200px; height: 200px; border-radius: 50%;
             background: conic-gradient(from 0deg, var(--metal), #000);
-            border: 2px solid var(--purple);
-            box-shadow: 0 0 30px rgba(188, 19, 254, 0.2);
+            border: 2px solid var(--cyan); /* Borda Ciano */
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.2); /* Glow Ciano */
             display: flex; justify-content: center; align-items: center;
             position: relative;
             animation: spin 10s linear infinite;
@@ -87,34 +88,36 @@
         
         .disc-art {
             width: 190px; height: 190px; border-radius: 50%;
-            background: url('https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=1000&auto=format&fit=crop'); /* Arte Abstrata */
-            background-size: cover; opacity: 0.8;
+            /* NOVA IMAGEM DE CAPA */
+            background: url('https://yt3.ggpht.com/pK7LROGCB7blHjmPGSX6xldW9O1FvH8tGrhCBHGz1lqqq-p1pMQBvXUcqW08ntomD8N6QixPP_Zk=s640-c-fcrop64=1,00000000ffffffff-nd-v1');
+            background-size: cover; background-position: center; opacity: 0.9;
         }
 
         .play-btn {
             position: absolute; width: 60px; height: 60px;
-            background: var(--gold); border-radius: 50%;
+            background: var(--gold); /* Botão Verde */
+            border-radius: 50%;
             display: flex; justify-content: center; align-items: center;
             color: #000; font-size: 1.5rem; cursor: pointer;
-            box-shadow: 0 0 20px var(--gold);
+            box-shadow: 0 0 20px var(--gold); /* Glow Verde */
             z-index: 20; transition: transform 0.2s;
         }
         .play-btn:active { transform: scale(0.9); }
 
-        /* EQUALIZADOR FAKE */
+        /* EQUALIZADOR */
         .eq-bars {
             display: flex; gap: 3px; height: 30px; align-items: flex-end;
             margin-top: 30px; opacity: 0.5;
         }
         .bar { width: 4px; background: var(--cyan); animation: eq 1s infinite ease-in-out; }
 
-        /* CHAT INTERATIVO (A RETENÇÃO) */
+        /* CHAT INTERFACE */
         .chat-interface {
             height: 350px; background: var(--glass);
-            border-top: 2px solid var(--purple);
+            border-top: 2px solid var(--gold); /* Borda Verde */
             border-radius: 25px 25px 0 0;
             padding: 20px; display: flex; flex-direction: column;
-            box-shadow: 0 -10px 40px rgba(0,0,0,0.8);
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.9);
         }
 
         .chat-window {
@@ -130,30 +133,31 @@
         }
 
         .bot {
-            align-self: flex-start; background: #222; border-left: 3px solid var(--cyan);
+            align-self: flex-start; background: #222; border-left: 3px solid var(--gold); /* Verde */
             color: #ddd; border-bottom-left-radius: 2px;
         }
 
         .user {
-            align-self: flex-end; background: linear-gradient(135deg, var(--purple), #6a0dad);
-            color: #fff; border-bottom-right-radius: 2px; box-shadow: 0 5px 15px rgba(188, 19, 254, 0.2);
+            /* Degradê Ciano para Verde */
+            align-self: flex-end; background: linear-gradient(135deg, var(--cyan), var(--gold));
+            color: #000; font-weight: 600; border-bottom-right-radius: 2px;
+            box-shadow: 0 5px 15px rgba(0, 243, 255, 0.2);
         }
 
-        /* ÁREA DE INPUT */
-        .input-area {
-            display: flex; gap: 10px; margin-top: 10px;
-        }
+        /* INPUT AREA */
+        .input-area { display: flex; gap: 10px; margin-top: 10px; }
 
         input {
-            flex: 1; background: #111; border: 1px solid #333; color: var(--cyan);
+            flex: 1; background: #000; border: 1px solid #333; color: var(--cyan);
             padding: 15px; border-radius: 50px; font-family: 'Montserrat', sans-serif;
             outline: none; transition: 0.3s;
         }
-        input:focus { border-color: var(--cyan); box-shadow: 0 0 10px rgba(0, 243, 255, 0.1); }
+        input:focus { border-color: var(--cyan); box-shadow: 0 0 10px rgba(0, 243, 255, 0.2); }
 
         #send-btn {
             width: 50px; height: 50px; border-radius: 50%; border: none;
-            background: var(--cyan); color: #000; font-size: 1.2rem;
+            background: var(--gold); /* Verde */
+            color: #000; font-size: 1.2rem;
             cursor: pointer; transition: 0.3s;
         }
 
@@ -163,31 +167,27 @@
         @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         @keyframes eq { 0%, 100% { height: 5px; } 50% { height: 100%; } }
 
-        /* LOADING OVERLAY */
+        /* LOADING */
         .loader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center;
             flex-direction: column; transition: opacity 1s;
         }
         .loader-text { color: var(--cyan); font-family: 'Orbitron'; letter-spacing: 3px; margin-top: 20px; }
-
-        /* Esconder scrollbar */
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
-
     </style>
 </head>
 <body>
 
     <div class="loader" id="loader">
-        <i class="fas fa-microchip fa-3x fa-spin" style="color:var(--purple)"></i>
+        <i class="fas fa-microchip fa-3x fa-spin" style="color:var(--cyan)"></i>
         <div class="loader-text">INICIANDO SISTEMA VIRTUDES...</div>
     </div>
 
     <canvas id="neural-network"></canvas>
 
     <div class="interface-wrapper">
-        
         <div class="top-bar">
             <div class="sys-status">/// CONEXÃO SEGURA ESTABELECIDA ///</div>
             <h1>VIRTUDES <span style="font-size:0.8rem; vertical-align:top; color:var(--gold)">O.S.</span></h1>
@@ -209,41 +209,31 @@
                 <div class="bar" style="animation-delay:0.4s"></div>
             </div>
 
-            <p style="margin-top:20px; font-size:0.8rem; color:#888; letter-spacing:1px">
+            <p style="margin-top:20px; font-size:0.8rem; color:#aaa; letter-spacing:1px">
                 "A arte é a única verdade."
             </p>
         </div>
 
         <div class="chat-interface">
-            <div class="chat-window" id="chatBox">
-                </div>
-            
+            <div class="chat-window" id="chatBox"></div>
             <form id="chatForm" class="input-area" onsubmit="handleInput(event)">
                 <input type="text" id="userInput" placeholder="Digite aqui..." autocomplete="off" disabled>
                 <button type="submit" id="send-btn" disabled><i class="fas fa-paper-plane"></i></button>
             </form>
         </div>
-
     </div>
 
-    <audio id="bgAudio" loop>
-        </audio>
-
     <script>
-        // --- O CÉREBRO DA IA ---
-        
-        // Link do seu Google Script (Já inserido)
+        // --- O CÉREBRO DA IA (Backend Google Script) ---
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwGpbJEhyoghRMydByF-K7LlmVvZod7NeLCXHWEKVM05Y7GtO4bApC_k2MdLNO_W4PYFw/exec';
         
         const chatBox = document.getElementById('chatBox');
         const userInput = document.getElementById('userInput');
         const sendBtn = document.getElementById('send-btn');
         
-        // Dados do Usuário
         let userData = { Email: '', Whatsapp: '' };
-        let step = 0; // 0 = Início, 1 = Email, 2 = Zap, 3 = Fim
+        let step = 0;
 
-        // 1. ANIMAÇÃO DE CARREGAMENTO
         window.onload = () => {
             setTimeout(() => {
                 document.getElementById('loader').style.opacity = '0';
@@ -253,11 +243,9 @@
             }, 1500);
         }
 
-        // 2. FUNÇÃO PLAY (COMEÇA A EXPERIÊNCIA)
         function startExperience() {
             document.getElementById('playIcon').classList.replace('fa-play', 'fa-pause');
             document.getElementById('eqBars').style.opacity = '1';
-            // document.getElementById('bgAudio').play(); // Descomente se tiver áudio real
             
             if(step === 0) {
                 step = 1;
@@ -269,18 +257,14 @@
             }
         }
 
-        // 3. LÓGICA DO CHAT (A MÁGICA)
         function handleInput(e) {
             e.preventDefault();
             let text = userInput.value.trim();
             if(!text) return;
-
-            // Mostra mensagem do usuário
             addUserMessage(text);
             userInput.value = '';
             disableInput();
 
-            // Processa a resposta
             setTimeout(() => {
                 if(step === 1) {
                     userData.Email = text;
@@ -289,7 +273,7 @@
                     setTimeout(() => {
                         addBotMessage("Agora, informe seu **WHATSAPP (com DDD)** para receber a senha de acesso.");
                         enableInput();
-                        userInput.type = "tel"; // Muda teclado pro celular
+                        userInput.type = "tel";
                     }, 800);
                 } 
                 else if (step === 2) {
@@ -300,11 +284,8 @@
             }, 800);
         }
 
-        // 4. ENVIO DE DADOS E FINALIZAÇÃO
         function finishRegistration() {
             addBotMessage("Criptografando dados... Aguarde.");
-            
-            // Envia para o Google Sheets
             let formData = new FormData();
             formData.append('Email', userData.Email);
             formData.append('Whatsapp', userData.Whatsapp);
@@ -325,11 +306,10 @@
                 });
         }
 
-        // AUXILIARES DE CHAT
         function addBotMessage(text) {
             const div = document.createElement('div');
             div.className = 'msg bot';
-            div.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // Negrito
+            div.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             chatBox.appendChild(div);
             scrollToBottom();
         }
@@ -346,11 +326,10 @@
         function enableInput() { userInput.disabled = false; sendBtn.disabled = false; userInput.focus(); }
         function disableInput() { userInput.disabled = true; sendBtn.disabled = true; }
 
-        // --- VISUAL DE FUNDO (PARTÍCULAS MATRIX) ---
+        // FUNDO DE PARTÍCULAS (Alterado para Ciano/Verde)
         const canvas = document.getElementById('neural-network');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-
         let particles = [];
         for(let i=0; i<50; i++) {
             particles.push({
@@ -358,27 +337,25 @@
                 y: Math.random() * canvas.height,
                 vx: (Math.random() - 0.5) * 0.5,
                 vy: (Math.random() - 0.5) * 0.5,
-                size: Math.random() * 2
+                size: Math.random() * 2,
+                color: Math.random() > 0.5 ? '#00f3ff' : '#39FF14' // Ciano ou Verde
             });
         }
-
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#00f3ff';
-            ctx.beginPath();
             particles.forEach(p => {
+                ctx.fillStyle = p.color;
+                ctx.beginPath();
                 p.x += p.vx; p.y += p.vy;
                 if(p.x < 0 || p.x > canvas.width) p.vx *= -1;
                 if(p.y < 0 || p.y > canvas.height) p.vy *= -1;
                 ctx.moveTo(p.x, p.y);
                 ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+                ctx.fill();
             });
-            ctx.fill();
             requestAnimationFrame(animate);
         }
         animate();
-
     </script>
 </body>
 </html>
- 
