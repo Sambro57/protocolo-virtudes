@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROTOCOLO VIRTUDES | Acesso Restrito</title>
+    <style>
+        /* --- ESTÉTICA DO CÓDIGO SAMURAY --- */
+        :root {
+            --bg-color: #050505; /* Preto Absoluto */
+            --text-color: #e0e0e0; /* Cinza Concreto */
+            --accent-color: #00ff41; /* Verde Matrix/Terminal */
+            --font-main: 'Courier New', Courier, monospace; /* Fonte Monospaced */
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Caixa Principal */
+        .container {
+            max-width: 600px;
+            width: 100%;
+            border: 1px solid #333;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+            position: relative;
+        }
+
+        /* Título Principal */
+        h1 {
+            color: var(--accent-color);
+            text-transform: uppercase;
+            font-size: 2rem; /* Aumentei um pouco para impor respeito */
+            margin-bottom: 10px;
+            text-align: center;
+            letter-spacing: 3px;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+        }
+
+        /* Subtítulo / Texto de Apoio */
+        h2 {
+            font-size: 1rem;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: normal;
+            border-bottom: 1px dashed #333;
+            padding-bottom: 20px;
+        }
+
+        .glitch-text {
+            font-weight: bold;
+            color: var(--accent-color);
+            text-shadow: 2px 0 #fff;
+        }
+
+        /* --- FORMULÁRIO --- */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        label {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 5px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            color: var(--accent-color);
+            padding: 15px;
+            font-family: var(--font-main);
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background-color: #111;
+            box-shadow: 0 0 8px rgba(0, 255, 65, 0.2);
+        }
+
+        /* --- BOTÃO DE AÇÃO --- */
+        button {
+            background-color: var(--accent-color);
+            color: #000;
+            border: none;
+            padding: 18px;
+            font-weight: 900;
+            font-family: var(--font-main);
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            margin-top: 20px;
+            transition: all 0.2s ease;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background-color: #fff;
+            box-shadow: 0 0 20px var(--accent-color);
+            transform: scale(1.02);
+        }
+
+        /* Rodapé */
+        .footer {
+            margin-top: 40px;
+            font-size: 0.7rem;
+            color: #444;
+            text-align: center;
+            border-top: 1px solid #222;
+            padding-top: 20px;
+        }
+
+        .status {
+            color: var(--accent-color);
+            font-weight: bold;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                border: none;
+                box-shadow: none;
+            }
+            h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>PROTOCOLO VIRTUDES</h1>
+        
+        <h2>
+            O sistema falhou. A honra foi esquecida.<br>
+            A restauração começa agora.
+            <br><br>
+            Identifique-se para liberar o álbum <span class="glitch-text">"VIRTUDES"</span>.
+        </h2>
+
+        <form action="https://formsubmit.co/atendbot@gmail.com" method="POST">
+            
+            <input type="hidden" name="_captcha" value="false"> <input type="hidden" name="_template" value="table"> <input type="hidden" name="_subject" value="NOVO RECRUTA - PROTOCOLO VIRTUDES">
+
+            <div>
+                <label>VULGO / NOME DE GUERRA</label>
+                <input type="text" name="nome" placeholder="Como te chamam?" required>
+            </div>
+
+            <div>
+                <label>WHATSAPP (COM DDD)</label>
+                <input type="tel" name="whatsapp" placeholder="Ex: 11 99999-9999" required>
+            </div>
+
+            <div>
+                <label>INIMIGO: O QUE ESTÁ ERRADO NA CENA HOJE?</label>
+                <textarea name="dor" rows="3" placeholder="Sem filtro. Diga o que te revolta." required></textarea>
+            </div>
+
+            <div>
+                <label>OBJETIVO: O QUE VOCÊ BUSCA AQUI?</label>
+                <select name="desejo" required>
+                    <option value="" disabled selected>Selecionar objetivo...</option>
+                    <option value="visão">Resgatar valores reais</option>
+                    <option value="tática">Estratégia de crescimento</option>
+                    <option value="conexão">Entrar para a irmandade</option>
+                    <option value="som">Apenas ouvir o som</option>
+                </select>
+            </div>
+
+            <button type="submit">INICIAR PROTOCOLO</button>
+        </form>
+
+        <div class="footer">
+            <p>STATUS DO SISTEMA: <span class="status">OPERANTE</span></p>
+            <p>QG GROVE SAMURAY © 2025</p>
+        </div>
+    </div>
+
+</body>
+</html>
