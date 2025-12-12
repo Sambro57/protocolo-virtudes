@@ -3,163 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QG GROVE SAMURAY | Experiência Exclusiva</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>QG GROVE SAMURAY | Tecnologia & Visão</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* --- ESTÉTICA PREMIUM (V8 SEDUÇÃO) --- */
+        /* --- PALETA ROYAL CYBER (V9) --- */
         :root {
-            --bg-dark: #0a0a0a;
-            --glass: rgba(255, 255, 255, 0.05);
-            --border: rgba(255, 255, 255, 0.1);
-            --accent: #8A2BE2; /* Roxo Real (Premium) */
-            --highlight: #00d4ff; /* Azul Moderno */
-            --text-main: #ffffff;
-            --text-muted: #a0a0a0;
+            --bg-matte: #0a0a0a;   /* Preto Fosco */
+            --card-bg: #111111;    /* Cinza Chumbo */
+            --cyan: #00f3ff;       /* Azul Ciano */
+            --purple: #bc13fe;     /* Roxo Fluorescente */
+            --gold: #FFD700;       /* Dourado Real */
+            --text-main: #f0f0f0;
+            --text-muted: #888;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            background-color: var(--bg-dark);
-            /* Gradiente suave e elegante no fundo */
-            background-image: radial-gradient(circle at top right, #1a0b2e 0%, transparent 40%),
-                              radial-gradient(circle at bottom left, #051820 0%, transparent 40%);
+            background-color: var(--bg-matte);
+            /* Toque sutil de roxo no fundo fosco */
+            background-image: radial-gradient(circle at 50% 0%, rgba(188, 19, 254, 0.1) 0%, transparent 50%);
             font-family: 'Montserrat', sans-serif;
             color: var(--text-main);
             min-height: 100vh;
             display: flex; flex-direction: column; align-items: center;
+            overflow-x: hidden;
         }
 
         .container {
-            max-width: 500px; width: 100%;
+            max-width: 600px; width: 100%;
             padding: 20px;
             display: flex; flex-direction: column; gap: 30px;
             padding-bottom: 100px;
         }
 
-        /* --- HEADER SEDUTOR --- */
+        /* --- HEADER COM TOQUE DOURADO --- */
         .header {
-            text-align: center; margin-top: 40px;
-            animation: fadeIn 1.5s ease;
+            text-align: center; margin-top: 50px;
+            animation: slideDown 1s ease;
         }
 
-        .brand-tag {
-            background: rgba(138, 43, 226, 0.15); color: var(--accent);
-            padding: 5px 15px; border-radius: 50px; font-size: 0.7rem;
-            font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
-            display: inline-block; margin-bottom: 15px;
-            border: 1px solid rgba(138, 43, 226, 0.3);
+        .brand-pill {
+            background: linear-gradient(90deg, var(--purple), var(--cyan));
+            color: #000; padding: 5px 15px; border-radius: 20px;
+            font-size: 0.7rem; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 1px; display: inline-block; margin-bottom: 15px;
+            box-shadow: 0 0 15px rgba(188, 19, 254, 0.4);
         }
 
         h1 {
-            font-size: 2.2rem; font-weight: 700; letter-spacing: -1px;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, #fff, #b3b3b3);
+            font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 10px;
+            /* Texto Dourado com Degradê */
+            background: linear-gradient(to right, var(--gold), #FFF8DC);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
         }
 
         .subtitle {
-            font-size: 1rem; color: var(--text-muted); line-height: 1.6; font-weight: 300;
+            font-size: 1rem; color: var(--text-muted); line-height: 1.6;
         }
 
-        /* --- CARDS DE VIDRO (GLASSMORPHISM) --- */
-        .feature-card {
-            background: var(--glass);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 20px;
+        /* --- CARDS INTERATIVOS (Ciano e Roxo) --- */
+        .grid-cards {
+            display: flex; flex-direction: column; gap: 20px; margin-top: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid #222;
+            border-left: 4px solid var(--purple); /* Lateral Roxa */
+            border-radius: 12px; padding: 25px;
             display: flex; align-items: center; gap: 20px;
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s ease, background 0.3s;
-            cursor: default;
+            transition: all 0.4s ease;
+            cursor: default; position: relative; overflow: hidden;
         }
 
-        .feature-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--accent);
+        /* Efeito Hover: O card acende em Ciano e Dourado */
+        .card:hover {
+            transform: translateX(10px);
+            border-color: var(--cyan);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+            background: #151515;
         }
 
-        .icon-box {
-            width: 50px; height: 50px;
-            background: linear-gradient(135deg, var(--accent), #4b0082);
-            border-radius: 12px;
+        .icon-circle {
+            width: 50px; height: 50px; border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem; color: #fff;
-            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
-        }
-
-        .card-text h3 { font-size: 1rem; margin-bottom: 4px; }
-        .card-text p { font-size: 0.8rem; color: var(--text-muted); }
-
-        /* --- FORMULÁRIO LIMPO --- */
-        .form-section {
-            background: #111;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            border: 1px solid var(--border);
-            text-align: center;
-        }
-
-        .form-title { font-size: 1.1rem; margin-bottom: 20px; font-weight: 600; }
-
-        .input-group {
-            position: relative; margin-bottom: 15px; text-align: left;
-        }
-
-        .input-group label {
-            font-size: 0.7rem; color: var(--text-muted); margin-left: 10px;
-            margin-bottom: 5px; display: block;
-        }
-
-        input {
-            width: 100%; padding: 16px;
-            background: #1a1a1a; border: 1px solid #333;
-            border-radius: 12px; color: #fff; font-size: 1rem;
-            transition: 0.3s; font-family: 'Montserrat', sans-serif;
-        }
-
-        input:focus {
-            outline: none; border-color: var(--accent); background: #222;
-        }
-
-        button {
-            width: 100%; padding: 18px; margin-top: 10px;
-            background: linear-gradient(90deg, var(--accent), #6a0dad);
-            color: white; border: none; border-radius: 12px;
-            font-size: 1rem; font-weight: 700; cursor: pointer;
-            box-shadow: 0 5px 20px rgba(138, 43, 226, 0.3);
+            font-size: 1.5rem; color: var(--cyan);
+            border: 1px solid var(--cyan);
             transition: 0.3s;
         }
 
-        button:hover { transform: scale(1.02); box-shadow: 0 8px 25px rgba(138, 43, 226, 0.5); }
+        .card:hover .icon-circle {
+            background: var(--cyan); color: #000; box-shadow: 0 0 15px var(--cyan);
+        }
+
+        .card-content h3 { font-size: 1.1rem; color: #fff; margin-bottom: 5px; }
+        .card-content p { font-size: 0.85rem; color: #aaa; }
+
+        /* --- FORMULÁRIO VIP (Preto Fosco e Dourado) --- */
+        .form-area {
+            background: #000; border: 1px solid var(--gold);
+            border-radius: 15px; padding: 30px; text-align: center;
+            margin-top: 30px; position: relative;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.1);
+        }
+
+        .form-title {
+            color: var(--gold); text-transform: uppercase; font-weight: 700;
+            margin-bottom: 20px; letter-spacing: 1px; font-size: 0.9rem;
+        }
+
+        input {
+            width: 100%; padding: 15px; margin-bottom: 15px;
+            background: #111; border: 1px solid #333; color: #fff;
+            border-radius: 8px; font-family: 'Montserrat', sans-serif;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            outline: none; border-color: var(--cyan); background: #1a1a1a;
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+        }
+
+        /* Botão Principal */
+        button {
+            width: 100%; padding: 18px; border: none; border-radius: 8px;
+            /* Degradê Ciano para Roxo */
+            background: linear-gradient(90deg, var(--cyan), var(--purple));
+            color: #000; font-weight: 800; text-transform: uppercase;
+            font-size: 1rem; cursor: pointer; transition: 0.3s;
+            box-shadow: 0 5px 20px rgba(188, 19, 254, 0.3);
+        }
+
+        button:hover {
+            transform: scale(1.02); filter: brightness(1.2);
+        }
 
         /* --- FOOTER & BOTÃO FLUTUANTE --- */
         .footer {
-            text-align: center; font-size: 0.7rem; color: #444; margin-top: 30px;
+            text-align: center; font-size: 0.7rem; color: #555; margin-top: 20px;
         }
 
         .atendbot-float {
             position: fixed; bottom: 20px; right: 20px;
-            background: #fff; color: #000;
-            padding: 12px 20px; border-radius: 30px;
-            font-weight: 600; font-size: 0.9rem;
-            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.2);
+            background: #000; border: 2px solid var(--gold); color: var(--gold);
+            padding: 12px 20px; border-radius: 50px; font-weight: 700;
             text-decoration: none; display: flex; align-items: center; gap: 10px;
-            z-index: 100; transition: 0.3s;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); transition: 0.3s; z-index: 100;
         }
 
-        .atendbot-float:hover { transform: scale(1.05); }
+        .atendbot-float:hover { background: var(--gold); color: #000; }
 
-        .status-dot {
-            width: 8px; height: 8px; background: #00d4ff; border-radius: 50%;
-            box-shadow: 0 0 8px #00d4ff;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
 
     </style>
 </head>
@@ -168,54 +167,52 @@
     <div class="container">
         
         <div class="header">
-            <span class="brand-tag">TECNOLOGIA DO S SAMURAY</span>
+            <span class="brand-pill">EQINTEC PRODUÇÕES</span>
             <h1>QG GROVE SAMURAY</h1>
             <p class="subtitle">
-                Conecte-se com a visão. Uma experiência de áudio, mentalidade e networking de alto nível.
+                Uma experiência imersiva em música, visão e tecnologia.<br>
+                Você foi convidado para acessar a base.
             </p>
         </div>
 
-        <div class="feature-card">
-            <div class="icon-box"><i class="fas fa-play"></i></div>
-            <div class="card-text">
-                <h3>Álbum Virtudes</h3>
-                <p>Ouça com exclusividade antes do lançamento oficial.</p>
-            </div>
-        </div>
-
-        <div class="feature-card">
-            <div class="icon-box"><i class="fas fa-brain"></i></div>
-            <div class="card-text">
-                <h3>Mentalidade Tática</h3>
-                <p>Conteúdo direto sobre visão de mundo e estratégia.</p>
-            </div>
-        </div>
-
-        <div class="feature-card">
-            <div class="icon-box"><i class="fas fa-robot"></i></div>
-            <div class="card-text">
-                <h3>AtendBot System</h3>
-                <p>Experimente a inteligência artificial na prática.</p>
-            </div>
-        </div>
-
-        <div class="form-section">
-            <div class="form-title">Solicitar meu Acesso VIP</div>
+        <div class="grid-cards">
             
+            <div class="card">
+                <div class="icon-circle"><i class="fas fa-music"></i></div>
+                <div class="card-content">
+                    <h3>Álbum Virtudes</h3>
+                    <p>Audição exclusiva das faixas antes do lançamento global.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="icon-circle"><i class="fas fa-microchip"></i></div>
+                <div class="card-content">
+                    <h3>Tecnologia AtendBot</h3>
+                    <p>Conheça o sistema automatizado que gerencia nossa operação.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="icon-circle"><i class="fas fa-users"></i></div>
+                <div class="card-content">
+                    <h3>Networking Real</h3>
+                    <p>Conexão direta com quem busca evolução e disciplina.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-area">
+            <div class="form-title">/// SOLICITAR ACESSO VIP ///</div>
+
             <form action="https://formsubmit.co/atendbot@gmail.com" method="POST">
-                <input type="hidden" name="_subject" value="LEAD VIP - V8 SEDUÇÃO">
+                <input type="hidden" name="_subject" value="LEAD V9 - ROYAL CYBER">
                 <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://wa.me/5571991755885?text=Ola%20Samuray,%20solicitei%20meu%20acesso%20VIP.">
+                <input type="hidden" name="_next" value="https://wa.me/5571991755885?text=Ola%20Samuray,%20solicitei%20meu%20acesso%20VIP%20no%20site.">
 
-                <div class="input-group">
-                    <label>SEU E-MAIL PRINCIPAL</label>
-                    <input type="email" name="email" placeholder="exemplo@email.com" required>
-                </div>
-
-                <div class="input-group">
-                    <label>WHATSAPP (COM DDD)</label>
-                    <input type="tel" name="whatsapp" placeholder="(71) 99999-9999" required>
-                </div>
+                <input type="email" name="email" placeholder="Seu Melhor E-mail" required>
+                <input type="tel" name="whatsapp" placeholder="WhatsApp (Com DDD)" required>
 
                 <button type="submit">LIBERAR MINHA VAGA</button>
             </form>
@@ -227,9 +224,8 @@
 
     </div>
 
-    <a href="https://wa.me/5571991755885?text=Ola%20AtendBot,%20tenho%20uma%20duvida." class="atendbot-float">
-        <div class="status-dot"></div>
-        Falar com AtendBot
+    <a href="https://wa.me/5571991755885?text=Ola%20AtendBot,%20preciso%20de%20ajuda." class="atendbot-float">
+        <i class="fas fa-comment-dots"></i> Falar com AtendBot
     </a>
 
 </body>
