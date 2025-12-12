@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PROTOCOLO VIRTUDES | Acesso Restrito</title>
+    <title>PROTOCOLO VIRTUDES | AtendBot System</title>
     <style>
-        /* --- ESTÉTICA DO CÓDIGO SAMURAY --- */
+        /* --- ESTÉTICA CYBERPUNK NEON (ATENDBOT CORE) --- */
         :root {
-            --bg-color: #050505; /* Preto Absoluto */
-            --text-color: #e0e0e0; /* Cinza Concreto */
-            --accent-color: #00ff41; /* Verde Matrix/Terminal */
-            --font-main: 'Courier New', Courier, monospace; /* Fonte Monospaced */
+            --bg-color: #050505;   /* Preto Profundo */
+            --cyan: #00f3ff;       /* Azul Ciano Neon (Tron) */
+            --purple: #bc13fe;     /* Roxo Fluorescente (Cyber) */
+            --text-color: #e0e0e0;
+            --font-main: 'Courier New', Courier, monospace;
         }
 
         body {
             background-color: var(--bg-color);
+            background-image: radial-gradient(circle at 50% 50%, #1a0b2e 0%, #000000 80%);
             color: var(--text-color);
             font-family: var(--font-main);
             margin: 0;
@@ -24,46 +26,51 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            line-height: 1.6;
         }
 
-        /* Caixa Principal */
+        /* Container Principal */
         .container {
             max-width: 600px;
             width: 100%;
             border: 1px solid #333;
             padding: 40px;
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
             position: relative;
+            background: rgba(0, 0, 0, 0.85);
+            /* Sombra Neon Bicolor */
+            box-shadow: -4px -4px 20px rgba(188, 19, 254, 0.3), 
+                        4px 4px 20px rgba(0, 243, 255, 0.3);
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
         }
 
-        /* Título Principal */
+        /* Título */
         h1 {
-            color: var(--accent-color);
             text-transform: uppercase;
-            font-size: 2rem; /* Aumentei um pouco para impor respeito */
-            margin-bottom: 10px;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
             text-align: center;
-            letter-spacing: 3px;
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 10px;
+            letter-spacing: 4px;
+            background: linear-gradient(90deg, var(--cyan), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
         }
 
-        /* Subtítulo / Texto de Apoio */
         h2 {
             font-size: 1rem;
             color: #fff;
             text-align: center;
             margin-bottom: 30px;
             font-weight: normal;
-            border-bottom: 1px dashed #333;
+            border-bottom: 1px solid var(--purple);
             padding-bottom: 20px;
+            line-height: 1.5;
         }
 
-        .glitch-text {
+        .highlight {
+            color: var(--cyan);
             font-weight: bold;
-            color: var(--accent-color);
-            text-shadow: 2px 0 #fff;
+            text-shadow: 0 0 8px var(--cyan);
         }
 
         /* --- FORMULÁRIO --- */
@@ -75,18 +82,21 @@
 
         label {
             font-size: 0.8rem;
-            color: #888;
+            color: var(--purple);
             margin-bottom: 5px;
             display: block;
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(188, 19, 254, 0.5);
         }
 
         input, textarea, select {
             width: 100%;
-            background-color: #0a0a0a;
+            background-color: #080808;
             border: 1px solid #333;
-            color: var(--accent-color);
+            border-left: 4px solid var(--purple);
+            color: var(--cyan);
             padding: 15px;
             font-family: var(--font-main);
             font-size: 1rem;
@@ -96,14 +106,14 @@
 
         input:focus, textarea:focus, select:focus {
             outline: none;
-            border-color: var(--accent-color);
+            border-color: var(--cyan);
             background-color: #111;
-            box-shadow: 0 0 8px rgba(0, 255, 65, 0.2);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
         }
 
-        /* --- BOTÃO DE AÇÃO --- */
+        /* Botão Enviar */
         button {
-            background-color: var(--accent-color);
+            background: linear-gradient(90deg, var(--purple), var(--cyan));
             color: #000;
             border: none;
             padding: 18px;
@@ -113,46 +123,70 @@
             cursor: pointer;
             text-transform: uppercase;
             margin-top: 20px;
-            transition: all 0.2s ease;
-            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            letter-spacing: 2px;
+            border-radius: 4px;
         }
 
         button:hover {
-            background-color: #fff;
-            box-shadow: 0 0 20px var(--accent-color);
             transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.6);
+            color: #fff;
         }
 
-        /* Rodapé */
+        /* --- WIDGET FLUTUANTE (ATENDBOT) --- */
+        .atendbot-widget {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #000;
+            border: 2px solid var(--cyan);
+            color: var(--cyan);
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: 0 0 15px var(--cyan);
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-family: sans-serif;
+            transition: 0.3s;
+            animation: pulse-border 2s infinite;
+        }
+
+        .atendbot-widget:hover {
+            background-color: var(--cyan);
+            color: #000;
+        }
+
+        .online-dot {
+            height: 10px;
+            width: 10px;
+            background-color: #0f0;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 5px #0f0;
+        }
+
+        @keyframes pulse-border {
+            0% { box-shadow: 0 0 0 0 rgba(0, 243, 255, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 243, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 243, 255, 0); }
+        }
+
         .footer {
             margin-top: 40px;
             font-size: 0.7rem;
-            color: #444;
+            color: #666;
             text-align: center;
-            border-top: 1px solid #222;
-            padding-top: 20px;
         }
 
-        .status {
-            color: var(--accent-color);
-            font-weight: bold;
-            animation: blink 1.5s infinite;
-        }
-
-        @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0.3; }
-            100% { opacity: 1; }
-        }
-
-        /* Mobile */
         @media (max-width: 600px) {
-            .container {
-                padding: 20px;
-                border: none;
-                box-shadow: none;
-            }
-            h1 { font-size: 1.5rem; }
+            .container { padding: 25px; border: none; }
+            h1 { font-size: 1.6rem; }
         }
     </style>
 </head>
@@ -162,50 +196,43 @@
         <h1>PROTOCOLO VIRTUDES</h1>
         
         <h2>
-            O sistema falhou. A honra foi esquecida.<br>
-            A restauração começa agora.
-            <br><br>
-            Identifique-se para liberar o álbum <span class="glitch-text">"VIRTUDES"</span>.
+            Conexão Segura Estabelecida.<br>
+            Acesse a inteligência do <span class="highlight">SAMURAY</span>.
         </h2>
 
         <form action="https://formsubmit.co/atendbot@gmail.com" method="POST">
             
-            <input type="hidden" name="_captcha" value="false"> <input type="hidden" name="_template" value="table"> <input type="hidden" name="_subject" value="NOVO RECRUTA - PROTOCOLO VIRTUDES">
+            <input type="hidden" name="_subject" value="NOVO LEAD - PROJETO ATENDBOT">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://sambro57.github.io/protocolo-virtudes/">
 
             <div>
-                <label>VULGO / NOME DE GUERRA</label>
-                <input type="text" name="nome" placeholder="Como te chamam?" required>
+                <label>VULGO / NOME</label>
+                <input type="text" name="nome" placeholder="Identificação..." required>
             </div>
 
             <div>
-                <label>WHATSAPP (COM DDD)</label>
-                <input type="tel" name="whatsapp" placeholder="Ex: 11 99999-9999" required>
+                <label>WHATSAPP</label>
+                <input type="tel" name="whatsapp" placeholder="(DDD) 99999-9999" required>
             </div>
 
             <div>
-                <label>INIMIGO: O QUE ESTÁ ERRADO NA CENA HOJE?</label>
-                <textarea name="dor" rows="3" placeholder="Sem filtro. Diga o que te revolta." required></textarea>
+                <label>A VISÃO</label>
+                <textarea name="visao" rows="3" placeholder="Qual sua busca no QG?" required></textarea>
             </div>
 
-            <div>
-                <label>OBJETIVO: O QUE VOCÊ BUSCA AQUI?</label>
-                <select name="desejo" required>
-                    <option value="" disabled selected>Selecionar objetivo...</option>
-                    <option value="visão">Resgatar valores reais</option>
-                    <option value="tática">Estratégia de crescimento</option>
-                    <option value="conexão">Entrar para a irmandade</option>
-                    <option value="som">Apenas ouvir o som</option>
-                </select>
-            </div>
-
-            <button type="submit">INICIAR PROTOCOLO</button>
+            <button type="submit">LIBERAR ACESSO</button>
         </form>
 
         <div class="footer">
-            <p>STATUS DO SISTEMA: <span class="status">OPERANTE</span></p>
-            <p>QG GROVE SAMURAY © 2025</p>
+            <p>POWERED BY ATENDBOT SYSTEM // V2.1</p>
         </div>
     </div>
+
+    <a href="https://wa.me/55SEUNUMEROAQUI?text=Ola%20AtendBot,%20quero%20acessar%20o%20Protocolo." class="atendbot-widget" target="_blank">
+        <span class="online-dot"></span>
+        <span>FALAR COM A IA</span>
+    </a>
 
 </body>
 </html>
