@@ -4,358 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>VIRTUDES O.S. | S Samuray</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- NÚCLEO DO SISTEMA VIRTUDES (PALETA CYBER-TOXIC) --- */
+        /* --- ESTÉTICA CYBER-TOXIC --- */
         :root {
-            --void: #050505;    /* Preto Fosco */
-            --metal: #1a1a1a;   /* Cinza Fosco */
-            --gold: #39FF14;    /* MUDADO: Verde Fluorescente (no lugar do dourado) */
-            --cyan: #00f3ff;    /* Azul Ciano Fluorescente */
-            --purple: #00f3ff;  /* MUDADO: Roxo virou Ciano para manter a paleta dupla */
-            --neon-glow: 0 0 10px rgba(0, 243, 255, 0.5);
-            --glass: rgba(20, 20, 20, 0.9); /* Mais fosco */
+            --bg: #050505;
+            --panel: #0a0a0a;
+            --cyan: #00f3ff;
+            --green: #39FF14;
+            --glass: rgba(15, 15, 15, 0.85);
+            --border: rgba(255, 255, 255, 0.1);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
 
         body {
-            background-color: var(--void);
-            color: #fff; /* Branco Fosco */
+            background-color: var(--bg);
+            color: #fff;
             font-family: 'Montserrat', sans-serif;
-            overflow: hidden;
             height: 100vh;
+            width: 100vw;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* FUNDO DE PARTÍCULAS */
-        #neural-network {
+        /* FUNDO ANIMADO */
+        #bg-canvas {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 0; opacity: 0.3;
+            z-index: 0; opacity: 0.2;
         }
 
-        /* INTERFACE PRINCIPAL */
-        .interface-wrapper {
+        /* --- O CONTAINER INTELIGENTE (ADAPTA O FORMATO) --- */
+        .main-interface {
             position: relative; z-index: 10;
-            width: 100%; max-width: 480px; height: 100%;
-            display: flex; flex-direction: column;
-            background: rgba(10, 10, 10, 0.8); /* Fundo mais fosco */
-            backdrop-filter: blur(5px);
-            border-left: 1px solid rgba(255,255,255,0.1);
-            border-right: 1px solid rgba(255,255,255,0.1);
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            display: flex;
+            overflow: hidden;
+            transition: all 0.5s ease;
         }
 
-        /* HEADER */
-        .top-bar {
-            padding: 20px; text-align: center;
-            border-bottom: 1px solid rgba(0, 243, 255, 0.2); /* Ciano */
-            background: linear-gradient(to bottom, rgba(0,0,0,1), transparent);
-        }
-
-        .sys-status {
-            font-family: 'Orbitron', sans-serif; font-size: 0.6rem; color: var(--gold); /* Verde */
-            letter-spacing: 2px; margin-bottom: 5px; animation: pulse 2s infinite;
-        }
-
-        h1 {
-            font-family: 'Orbitron', sans-serif; font-size: 1.8rem;
-            /* Degradê Branco para Ciano */
-            background: linear-gradient(90deg, #fff, var(--cyan));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            text-transform: uppercase; letter-spacing: 2px;
-        }
-
-        /* ÁREA VISUALIZER */
-        .visualizer-container {
-            flex: 1; display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
-            position: relative;
-        }
-
-        .disc-wrapper {
-            width: 200px; height: 200px; border-radius: 50%;
-            background: conic-gradient(from 0deg, var(--metal), #000);
-            border: 2px solid var(--cyan); /* Borda Ciano */
-            box-shadow: 0 0 30px rgba(0, 243, 255, 0.2); /* Glow Ciano */
-            display: flex; justify-content: center; align-items: center;
-            position: relative;
-            animation: spin 10s linear infinite;
-        }
-        
-        .disc-art {
-            width: 190px; height: 190px; border-radius: 50%;
-            /* NOVA IMAGEM DE CAPA */
-            background: url('https://yt3.ggpht.com/pK7LROGCB7blHjmPGSX6xldW9O1FvH8tGrhCBHGz1lqqq-p1pMQBvXUcqW08ntomD8N6QixPP_Zk=s640-c-fcrop64=1,00000000ffffffff-nd-v1');
-            background-size: cover; background-position: center; opacity: 0.9;
-        }
-
-        .play-btn {
-            position: absolute; width: 60px; height: 60px;
-            background: var(--gold); /* Botão Verde */
-            border-radius: 50%;
-            display: flex; justify-content: center; align-items: center;
-            color: #000; font-size: 1.5rem; cursor: pointer;
-            box-shadow: 0 0 20px var(--gold); /* Glow Verde */
-            z-index: 20; transition: transform 0.2s;
-        }
-        .play-btn:active { transform: scale(0.9); }
-
-        /* EQUALIZADOR */
-        .eq-bars {
-            display: flex; gap: 3px; height: 30px; align-items: flex-end;
-            margin-top: 30px; opacity: 0.5;
-        }
-        .bar { width: 4px; background: var(--cyan); animation: eq 1s infinite ease-in-out; }
-
-        /* CHAT INTERFACE */
-        .chat-interface {
-            height: 350px; background: var(--glass);
-            border-top: 2px solid var(--gold); /* Borda Verde */
-            border-radius: 25px 25px 0 0;
-            padding: 20px; display: flex; flex-direction: column;
-            box-shadow: 0 -10px 40px rgba(0,0,0,0.9);
-        }
-
-        .chat-window {
-            flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 15px;
-            padding-bottom: 10px; scroll-behavior: smooth;
-        }
-
-        /* BALÕES DE MENSAGEM */
-        .msg {
-            max-width: 85%; padding: 12px 18px; border-radius: 12px;
-            font-size: 0.9rem; line-height: 1.4; position: relative;
-            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .bot {
-            align-self: flex-start; background: #222; border-left: 3px solid var(--gold); /* Verde */
-            color: #ddd; border-bottom-left-radius: 2px;
-        }
-
-        .user {
-            /* Degradê Ciano para Verde */
-            align-self: flex-end; background: linear-gradient(135deg, var(--cyan), var(--gold));
-            color: #000; font-weight: 600; border-bottom-right-radius: 2px;
-            box-shadow: 0 5px 15px rgba(0, 243, 255, 0.2);
-        }
-
-        /* INPUT AREA */
-        .input-area { display: flex; gap: 10px; margin-top: 10px; }
-
-        input {
-            flex: 1; background: #000; border: 1px solid #333; color: var(--cyan);
-            padding: 15px; border-radius: 50px; font-family: 'Montserrat', sans-serif;
-            outline: none; transition: 0.3s;
-        }
-        input:focus { border-color: var(--cyan); box-shadow: 0 0 10px rgba(0, 243, 255, 0.2); }
-
-        #send-btn {
-            width: 50px; height: 50px; border-radius: 50%; border: none;
-            background: var(--gold); /* Verde */
-            color: #000; font-size: 1.2rem;
-            cursor: pointer; transition: 0.3s;
-        }
-
-        /* ANIMAÇÕES */
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        @keyframes eq { 0%, 100% { height: 5px; } 50% { height: 100%; } }
-
-        /* LOADING */
-        .loader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center;
-            flex-direction: column; transition: opacity 1s;
-        }
-        .loader-text { color: var(--cyan); font-family: 'Orbitron'; letter-spacing: 3px; margin-top: 20px; }
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
-    </style>
-</head>
-<body>
-
-    <div class="loader" id="loader">
-        <i class="fas fa-microchip fa-3x fa-spin" style="color:var(--cyan)"></i>
-        <div class="loader-text">INICIANDO SISTEMA VIRTUDES...</div>
-    </div>
-
-    <canvas id="neural-network"></canvas>
-
-    <div class="interface-wrapper">
-        <div class="top-bar">
-            <div class="sys-status">/// CONEXÃO SEGURA ESTABELECIDA ///</div>
-            <h1>VIRTUDES <span style="font-size:0.8rem; vertical-align:top; color:var(--gold)">O.S.</span></h1>
-        </div>
-
-        <div class="visualizer-container">
-            <div class="disc-wrapper">
-                <div class="disc-art"></div>
-            </div>
-            <div class="play-btn" onclick="startExperience()">
-                <i class="fas fa-play" id="playIcon"></i>
-            </div>
-            
-            <div class="eq-bars" id="eqBars" style="opacity:0">
-                <div class="bar" style="animation-delay:0.1s"></div>
-                <div class="bar" style="animation-delay:0.3s"></div>
-                <div class="bar" style="animation-delay:0.5s"></div>
-                <div class="bar" style="animation-delay:0.2s"></div>
-                <div class="bar" style="animation-delay:0.4s"></div>
-            </div>
-
-            <p style="margin-top:20px; font-size:0.8rem; color:#aaa; letter-spacing:1px">
-                "A arte é a única verdade."
-            </p>
-        </div>
-
-        <div class="chat-interface">
-            <div class="chat-window" id="chatBox"></div>
-            <form id="chatForm" class="input-area" onsubmit="handleInput(event)">
-                <input type="text" id="userInput" placeholder="Digite aqui..." autocomplete="off" disabled>
-                <button type="submit" id="send-btn" disabled><i class="fas fa-paper-plane"></i></button>
-            </form>
-        </div>
-    </div>
-
-    <script>
-        // --- O CÉREBRO DA IA (Backend Google Script) ---
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwGpbJEhyoghRMydByF-K7LlmVvZod7NeLCXHWEKVM05Y7GtO4bApC_k2MdLNO_W4PYFw/exec';
-        
-        const chatBox = document.getElementById('chatBox');
-        const userInput = document.getElementById('userInput');
-        const sendBtn = document.getElementById('send-btn');
-        
-        let userData = { Email: '', Whatsapp: '' };
-        let step = 0;
-
-        window.onload = () => {
-            setTimeout(() => {
-                document.getElementById('loader').style.opacity = '0';
-                setTimeout(() => { document.getElementById('loader').style.display = 'none'; }, 1000);
-                addBotMessage("Bem-vindo à frequência do Samuray.");
-                setTimeout(() => addBotMessage("Para desbloquear o álbum VIRTUDES, toque no Play."), 800);
-            }, 1500);
-        }
-
-        function startExperience() {
-            document.getElementById('playIcon').classList.replace('fa-play', 'fa-pause');
-            document.getElementById('eqBars').style.opacity = '1';
-            
-            if(step === 0) {
-                step = 1;
-                setTimeout(() => addBotMessage("Conectando ao banco de dados..."), 500);
-                setTimeout(() => {
-                    addBotMessage("Preciso validar sua identidade. Qual seu melhor **E-MAIL** para envio da arte?");
-                    enableInput();
-                }, 1500);
+        /* --- MODO PC (16:9 - WIDESCREEN) --- */
+        @media (min-width: 1024px) {
+            .main-interface {
+                width: 90vw; max-width: 1200px;
+                height: 80vh; max-height: 700px;
+                border-radius: 20px;
+                flex-direction: row; /* Lado a Lado */
             }
+            .visual-section { width: 50%; border-right: 1px solid var(--border); }
+            .chat-section { width: 50%; }
         }
 
-        function handleInput(e) {
-            e.preventDefault();
-            let text = userInput.value.trim();
-            if(!text) return;
-            addUserMessage(text);
-            userInput.value = '';
-            disableInput();
-
-            setTimeout(() => {
-                if(step === 1) {
-                    userData.Email = text;
-                    step = 2;
-                    addBotMessage("E-mail registrado.");
-                    setTimeout(() => {
-                        addBotMessage("Agora, informe seu **WHATSAPP (com DDD)** para receber a senha de acesso.");
-                        enableInput();
-                        userInput.type = "tel";
-                    }, 800);
-                } 
-                else if (step === 2) {
-                    userData.Whatsapp = text;
-                    step = 3;
-                    finishRegistration();
-                }
-            }, 800);
+        /* --- MODO TABLET --- */
+        @media (min-width: 600px) and (max-width: 1023px) {
+            .main-interface {
+                width: 80vw; height: 90vh;
+                border-radius: 15px;
+                flex-direction: column;
+            }
+            .visual-section { height: 40%; border-bottom: 1px solid var(--border); }
+            .chat-section { height: 60%; }
         }
 
-        function finishRegistration() {
-            addBotMessage("Criptografando dados... Aguarde.");
-            let formData = new FormData();
-            formData.append('Email', userData.Email);
-            formData.append('Whatsapp', userData.Whatsapp);
-
-            fetch(SCRIPT_URL, { method: 'POST', body: formData })
-                .then(response => {
-                    addBotMessage("ACESSO AUTORIZADO! 🔓");
-                    addBotMessage("Redirecionando para o canal seguro...");
-                    setTimeout(() => {
-                        window.location.href = "https://wa.me/5571991755885?text=Ola%20Samuray.%20Completei%20o%20Protocolo.%20Senha:%20VIRTUDES";
-                    }, 2000);
-                })
-                .catch(error => {
-                    addBotMessage("Erro na conexão. Redirecionando manualmente.");
-                    setTimeout(() => {
-                        window.location.href = "https://wa.me/5571991755885?text=Erro%20no%20sistema%20mas%20quero%20o%20link.";
-                    }, 2000);
-                });
+        /* --- MODO CELULAR (9:16 - VERTICAL) --- */
+        @media (max-width: 599px) {
+            .main-interface {
+                width: 100%; height: 100%;
+                border-radius: 0;
+                flex-direction: column;
+            }
+            .visual-section { 
+                height: 45%; 
+                border-bottom: 2px solid var(--green);
+                background: radial-gradient(circle at bottom, #111 0%, transparent 70%);
+            }
+            .chat-section { height: 55%; }
+            
+            /* Ajustes finos pro celular */
+            h1 { font-size: 1.5rem !important; }
+            .disc-wrapper { width: 160px !important; height: 160px !important; }
+            .disc-art { width: 150px !important; height: 150px !important; }
         }
-
-        function addBotMessage(text) {
-            const div = document.createElement('div');
-            div.className = 'msg bot';
-            div.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            chatBox.appendChild(div);
-            scrollToBottom();
-        }
-
-        function addUserMessage(text) {
-            const div = document.createElement('div');
-            div.className = 'msg user';
-            div.innerText = text;
-            chatBox.appendChild(div);
-            scrollToBottom();
-        }
-
-        function scrollToBottom() { chatBox.scrollTop = chatBox.scrollHeight; }
-        function enableInput() { userInput.disabled = false; sendBtn.disabled = false; userInput.focus(); }
-        function disableInput() { userInput.disabled = true; sendBtn.disabled = true; }
-
-        // FUNDO DE PARTÍCULAS (Alterado para Ciano/Verde)
-        const canvas = document.getElementById('neural-network');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        let particles = [];
-        for(let i=0; i<50; i++) {
-            particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                vx: (Math.random() - 0.5) * 0.5,
-                vy: (Math.random() - 0.5) * 0.5,
-                size: Math.random() * 2,
-                color: Math.random() > 0.5 ? '#00f3ff' : '#39FF14' // Ciano ou Verde
-            });
-        }
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                ctx.fillStyle = p.color;
-                ctx.beginPath();
-                p.x += p.vx; p.y += p.vy;
-                if(p.x < 0 || p.x > canvas.width) p.vx *= -1;
-                if(p.y < 0 || p.y > canvas.height) p.vy *= -1;
-                ctx.moveTo(p.x, p.y);
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
-                ctx.fill();
-            });
-            requestAnimationFrame(animate);
-        }
-        animate();
-    </script>
-</body>
-</html>
