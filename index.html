@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PROTOCOLO VIRTUDES | Sistema Ativo</title>
+    <title>PROTOCOLO VIRTUDES | Acesso Mobile</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* --- ESTÉTICA CYBERPUNK V5 (SCANNER VIVO + EMAIL CAPTURE) --- */
+        /* --- ESTÉTICA CYBERPUNK V6 (TIMELINE SCROLL) --- */
         :root {
             --bg-color: #050505;
             --cyan: #00f3ff;
@@ -18,14 +18,12 @@
 
         body {
             background-color: var(--bg-color);
-            background-image: 
-                linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
-            background-size: 30px 30px; /* Matrix Grid */
+            /* Fundo mais limpo para focar no conteúdo central */
+            background-image: linear-gradient(to bottom, #000 0%, #1a0b2e 100%);
             color: var(--text-color);
             font-family: var(--font-main);
             margin: 0;
-            padding: 20px;
+            padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -33,198 +31,263 @@
             overflow-x: hidden;
         }
 
-        /* SENSOR DE ESCANEAMENTO */
-        .scanner-line {
-            position: fixed; top: 0; left: 0; width: 100%; height: 5px;
-            background: var(--cyan); box-shadow: 0 0 15px var(--cyan);
-            opacity: 0.5; animation: scan 4s linear infinite; z-index: 999;
-            pointer-events: none;
-        }
-
-        @keyframes scan {
-            0% { top: -10%; opacity: 0; }
-            50% { opacity: 1; }
-            100% { top: 110%; opacity: 0; }
+        /* BARRA DE PROGRESSO NO TOPO (SCROLL INDICATOR) */
+        .scroll-progress {
+            position: fixed; top: 0; left: 0; height: 4px; background: var(--cyan);
+            width: 0%; z-index: 1000; box-shadow: 0 0 10px var(--cyan);
         }
 
         .container {
-            max-width: 700px; width: 100%;
-            border: 1px solid #333; padding: 40px;
-            position: relative; background: rgba(0, 0, 0, 0.9);
-            box-shadow: 0 0 40px rgba(0, 243, 255, 0.1);
-            border-radius: 12px; backdrop-filter: blur(10px);
-            margin-top: 40px; margin-bottom: 80px; z-index: 10;
+            max-width: 600px; width: 100%;
+            padding: 20px; box-sizing: border-box;
+            display: flex; flex-direction: column; gap: 30px;
+            padding-bottom: 100px; /* Espaço pro footer */
         }
 
-        /* IMAGEM DE TOPO */
-        .hero-image {
-            width: 100%; height: 160px;
-            background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover; background-position: center;
-            border-radius: 8px; margin-bottom: 20px;
-            border: 1px solid #333; filter: grayscale(100%); transition: 0.5s;
+        /* HERO SECTION (IMPACTO VISUAL) */
+        .hero-section {
+            text-align: center; margin-top: 20px;
+            position: relative;
         }
 
-        .hero-image:hover {
-            filter: grayscale(0%); border-color: var(--cyan);
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+        .glitch-img {
+            width: 100%; height: 200px; object-fit: cover;
+            border-radius: 12px; border: 1px solid #333;
+            filter: brightness(0.8) contrast(1.2);
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
         }
 
         h1 {
-            text-transform: uppercase; font-size: 2.5rem; margin-bottom: 10px;
-            text-align: center; letter-spacing: 4px;
-            background: linear-gradient(90deg, var(--cyan), #fff, var(--purple));
-            background-size: 200% auto;
+            font-size: 2rem; text-transform: uppercase; letter-spacing: 2px;
+            margin-top: -30px; position: relative; z-index: 2;
+            text-shadow: 0 0 10px rgba(0,0,0,0.8);
+            background: linear-gradient(90deg, #fff, var(--cyan));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            animation: shine 3s linear infinite;
         }
 
-        @keyframes shine { to { background-position: 200% center; } }
-
-        .sub-headline {
-            font-size: 1rem; color: #aaa; text-align: center; margin-bottom: 40px;
-            border-bottom: 1px solid #333; padding-bottom: 20px;
+        .mission-text {
+            font-size: 0.9rem; color: #aaa; margin-top: 10px; line-height: 1.6;
+            border-left: 2px solid var(--purple); padding-left: 15px; text-align: left;
+            background: rgba(188, 19, 254, 0.05); padding: 10px; border-radius: 0 8px 8px 0;
         }
 
-        /* GRID INTERATIVA */
-        .benefits-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px;
+        /* --- TIMELINE INTERATIVA (O PULO DO GATO) --- */
+        .timeline {
+            position: relative; margin-top: 20px;
         }
 
-        .benefit-card {
-            background: #0b0b0b; border: 1px solid #222; padding: 20px;
-            border-radius: 6px; text-align: center; transition: all 0.3s;
-            cursor: crosshair; position: relative; overflow: hidden;
+        /* Linha Vertical Neon */
+        .timeline::before {
+            content: ''; position: absolute; left: 15px; top: 0; bottom: 0;
+            width: 2px; background: linear-gradient(to bottom, var(--cyan), var(--purple), transparent);
+            box-shadow: 0 0 10px var(--cyan);
         }
 
-        .benefit-card:hover { border-color: var(--cyan); transform: translateY(-3px); background: #111; }
-        .benefit-card::after {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, rgba(0,243,255,0.1) 0%, transparent 70%);
-            opacity: 0; transition: 0.3s;
-        }
-        .benefit-card:hover::after { opacity: 1; }
-
-        .benefit-icon { font-size: 1.8rem; color: var(--purple); margin-bottom: 10px; }
-        .benefit-title { color: #fff; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; }
-        .benefit-desc { font-size: 0.75rem; color: #666; margin-top: 5px; }
-
-        /* FORMULÁRIO */
-        form {
-            background: #080808; padding: 25px; border: 1px dashed #444;
-            border-radius: 8px; position: relative;
-        }
-        form::before {
-            content: 'REC'; position: absolute; top: 10px; right: 10px;
-            font-size: 0.6rem; color: red; animation: blink 1s infinite;
-        }
-        @keyframes blink { 50% { opacity: 0; } }
-
-        label {
-            font-size: 0.7rem; color: var(--cyan); margin-bottom: 5px;
-            display: block; text-transform: uppercase; font-weight: bold;
+        .timeline-item {
+            position: relative; margin-bottom: 25px; padding-left: 45px;
+            cursor: pointer;
         }
 
-        input, textarea {
-            width: 100%; background-color: #000; border: 1px solid #333;
-            border-left: 3px solid var(--purple); color: #fff; padding: 12px;
-            font-family: var(--font-main); font-size: 0.9rem; box-sizing: border-box; margin-bottom: 15px;
+        /* Bolinha da Timeline */
+        .timeline-dot {
+            position: absolute; left: 6px; top: 0; width: 20px; height: 20px;
+            background: #000; border: 2px solid var(--cyan); border-radius: 50%;
+            z-index: 2; transition: 0.3s; box-shadow: 0 0 10px var(--cyan);
         }
-        input:focus { outline: none; border-color: var(--cyan); box-shadow: 0 0 10px rgba(0, 243, 255, 0.1); }
 
-        button {
-            width: 100%; background: var(--cyan); color: #000; border: none; padding: 15px;
-            font-weight: 900; font-family: var(--font-main); font-size: 1.1rem;
-            cursor: pointer; text-transform: uppercase; margin-top: 10px;
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 95% 100%, 0 100%);
+        /* Título do Card (Sempre visível) */
+        .timeline-header {
+            background: #111; border: 1px solid #333; padding: 15px; border-radius: 8px;
+            display: flex; justify-content: space-between; align-items: center;
             transition: 0.3s;
         }
-        button:hover { background: #fff; box-shadow: 0 0 20px var(--cyan); }
 
-        /* RODAPÉ ASSINADO */
+        .timeline-title {
+            color: #fff; font-weight: bold; text-transform: uppercase; font-size: 1rem;
+        }
+
+        .toggle-icon { color: var(--cyan); transition: 0.3s; }
+
+        /* Conteúdo Explicativo (Escondido) */
+        .timeline-content {
+            max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out;
+            background: rgba(0, 243, 255, 0.05); border-radius: 0 0 8px 8px;
+            border: 1px solid transparent; border-top: none;
+        }
+
+        .content-inner {
+            padding: 15px; font-size: 0.85rem; color: #ccc; line-height: 1.5;
+        }
+
+        /* ESTADO ATIVO (QUANDO CLICA) */
+        .timeline-item.active .timeline-dot { background: var(--cyan); box-shadow: 0 0 20px var(--cyan); }
+        .timeline-item.active .timeline-header {
+            border-color: var(--cyan); background: #0a0a0a;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.1); border-radius: 8px 8px 0 0;
+        }
+        .timeline-item.active .toggle-icon { transform: rotate(180deg); }
+        .timeline-item.active .timeline-content {
+            max-height: 200px; /* Altura suficiente para o texto */
+            border-color: var(--cyan);
+        }
+
+        /* FORMULÁRIO FINAL */
+        .form-section {
+            background: #080808; padding: 25px; border-radius: 12px;
+            border: 1px dashed #444; margin-top: 20px; position: relative;
+        }
+
+        .form-header {
+            text-align: center; margin-bottom: 20px;
+            color: var(--green); text-transform: uppercase; font-weight: bold; letter-spacing: 1px;
+        }
+
+        input {
+            width: 100%; background: #000; border: 1px solid #333; color: #fff;
+            padding: 15px; font-family: var(--font-main); box-sizing: border-box;
+            margin-bottom: 15px; border-radius: 4px; transition: 0.3s;
+        }
+        input:focus { border-color: var(--green); box-shadow: 0 0 10px rgba(0, 255, 0, 0.2); outline: none; }
+
+        button {
+            width: 100%; background: var(--green); color: #000; padding: 18px; border: none;
+            font-weight: 900; text-transform: uppercase; font-size: 1.1rem; cursor: pointer;
+            border-radius: 4px; letter-spacing: 1px; box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+        }
+
+        /* RODAPÉ OFICIAL */
         .footer {
             margin-top: 40px; font-size: 0.7rem; color: #555; text-align: center;
             border-top: 1px solid #222; padding-top: 20px; width: 100%; letter-spacing: 1px;
         }
 
-        /* ATENDBOT WIDGET */
-        .atendbot-widget {
-            position: fixed; bottom: 20px; right: 20px;
-            background-color: #000; border: 1px solid var(--green); color: var(--green);
-            padding: 12px 20px; border-radius: 4px; font-weight: bold;
-            box-shadow: 0 0 10px var(--green); text-decoration: none;
-            font-family: sans-serif; display: flex; align-items: center; gap: 10px;
-            z-index: 1000; transition: 0.3s;
-        }
-        .atendbot-widget:hover { background: var(--green); color: #000; }
-        .online-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; box-shadow: 0 0 5px var(--green); }
-
-        @media (max-width: 600px) {
-            .benefits-grid { grid-template-columns: 1fr; }
-            h1 { font-size: 1.8rem; }
-            .container { padding: 20px; }
+        /* ATENDBOT */
+        .atendbot-btn {
+            position: fixed; bottom: 20px; right: 20px; z-index: 1000;
+            background: #000; color: var(--cyan); border: 2px solid var(--cyan);
+            padding: 12px 18px; border-radius: 50px; font-weight: bold;
+            box-shadow: 0 0 15px var(--cyan); text-decoration: none; display: flex; align-items: center; gap: 8px;
         }
     </style>
 </head>
 <body>
 
-    <div class="scanner-line"></div>
+    <div class="scroll-progress" id="progressBar"></div>
 
     <div class="container">
-        <div class="hero-image"></div>
-
-        <h1>QG GROVE SAMURAY</h1>
-        <p class="sub-headline">
-            Sistema operacional ativo. Protocolo de recrutamento iniciado.
-        </p>
-
-        <div class="benefits-grid">
-            <div class="benefit-card">
-                <i class="fas fa-music benefit-icon"></i>
-                <div class="benefit-title">Álbum Virtudes</div>
-                <div class="benefit-desc">Audição tática antecipada.</div>
-            </div>
-            <div class="benefit-card">
-                <i class="fas fa-microchip benefit-icon"></i>
-                <div class="benefit-title">Tecnologia do S Samuray</div>
-                <div class="benefit-desc">Acesso aos códigos da mente.</div>
-            </div>
-            <div class="benefit-card">
-                <i class="fas fa-eye benefit-icon"></i>
-                <div class="benefit-title">Visão de Guerra</div>
-                <div class="benefit-desc">Estratégias para o mundo real.</div>
-            </div>
-            <div class="benefit-card">
-                <i class="fas fa-network-wired benefit-icon"></i>
-                <div class="benefit-title">Networking</div>
-                <div class="benefit-desc">Conexão com a base aliada.</div>
+        
+        <div class="hero-section">
+            <img src="https://images.unsplash.com/photo-1535378437327-1011d95d10fe?q=80&w=2070&auto=format&fit=crop" class="glitch-img" alt="Grove Samuray">
+            <h1>QG GROVE SAMURAY</h1>
+            <div class="mission-text">
+                > ACESSO DE ALTO NÍVEL DETECTADO.<br>
+                > BEM-VINDO À BASE TÁTICA.<br>
+                > Role para descriptografar os benefícios.
             </div>
         </div>
 
-        <form action="https://formsubmit.co/atendbot@gmail.com" method="POST">
+        <div class="timeline">
             
-            <input type="hidden" name="_subject" value="NOVO RECRUTA - LEAD V5">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_next" value="https://wa.me/5571991755885?text=Protocolo%20enviado.%20Aguardando%20instrucoes.">
+            <div class="timeline-item" onclick="toggleItem(this)">
+                <div class="timeline-dot"></div>
+                <div class="timeline-header">
+                    <span class="timeline-title">FASE 01: O ARSENAL SONORO</span>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="timeline-content">
+                    <div class="content-inner">
+                        Acesso antecipado ao álbum <strong>"VIRTUDES"</strong>. Você ouvirá as faixas táticas antes que o sistema comercial coloque as mãos nelas.
+                    </div>
+                </div>
+            </div>
 
-            <label>SEU MELHOR E-MAIL</label>
-            <input type="email" name="email" placeholder="Para receber os códigos..." required>
+            <div class="timeline-item" onclick="toggleItem(this)">
+                <div class="timeline-dot"></div>
+                <div class="timeline-header">
+                    <span class="timeline-title">FASE 02: TECNOLOGIA DO SAMURAY</span>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="timeline-content">
+                    <div class="content-inner">
+                        Entenda como operamos. Veja por dentro o código do <strong>AtendBot</strong> e as automações que regem o novo mercado digital.
+                    </div>
+                </div>
+            </div>
 
-            <label>WHATSAPP (COM DDD)</label>
-            <input type="tel" name="whatsapp" placeholder="Canal de comunicação..." required>
+            <div class="timeline-item" onclick="toggleItem(this)">
+                <div class="timeline-dot"></div>
+                <div class="timeline-header">
+                    <span class="timeline-title">FASE 03: VISÃO DE GUERRA</span>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="timeline-content">
+                    <div class="content-inner">
+                        Não é só música. É mentalidade. Receba drops de conteúdo sobre estratégia, disciplina e visão de rua aplicada aos negócios.
+                    </div>
+                </div>
+            </div>
 
-            <button type="submit">INICIAR CONEXÃO</button>
-        </form>
+            <div class="timeline-item" onclick="toggleItem(this)">
+                <div class="timeline-dot"></div>
+                <div class="timeline-header">
+                    <span class="timeline-title">FASE 04: A IRMANDADE</span>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="timeline-content">
+                    <div class="content-inner">
+                        Acesso ao círculo fechado. Networking de alto nível com quem está na mesma frequência de evolução que você.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-section">
+            <div class="form-header">/// ALISTAMENTO OBRIGATÓRIO ///</div>
+            
+            <form action="https://formsubmit.co/atendbot@gmail.com" method="POST">
+                <input type="hidden" name="_subject" value="LEAD V6 - TIMELINE">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="https://wa.me/5571991755885?text=Protocolo%20iniciado.%20Aguardando%20base.">
+
+                <input type="email" name="email" placeholder="DIGITE SEU MELHOR E-MAIL" required>
+                <input type="tel" name="whatsapp" placeholder="WHATSAPP (COM DDD)" required>
+
+                <button type="submit">CONFIRMAR PRESENÇA NA BASE</button>
+            </form>
+        </div>
 
         <div class="footer">
             Edilson O. A. Rangel - QG Grove Samuray - EQINTEC PRODUÇÕES
         </div>
+
     </div>
 
-    <a href="https://wa.me/5571991755885?text=Salve%20AtendBot,%20quero%20trocar%20uma%20ideia%20agora." class="atendbot-widget" target="_blank">
-        <span class="online-dot"></span>
-        <span>FALAR COM O ATENDBOT</span>
+    <a href="https://wa.me/5571991755885?text=Ola%20AtendBot,%20vim%20pelo%20site." class="atendbot-btn" target="_blank">
+        🤖 <span style="font-size: 0.8rem;">FALAR COM O ATENDBOT</span>
     </a>
+
+    <script>
+        function toggleItem(element) {
+            // Fecha todos os outros antes de abrir este (efeito sanfona)
+            const allItems = document.querySelectorAll('.timeline-item');
+            allItems.forEach(item => {
+                if (item !== element) {
+                    item.classList.remove('active');
+                }
+            });
+            // Abre ou fecha o atual
+            element.classList.toggle('active');
+        }
+
+        // Script da barra de progresso no topo
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        };
+    </script>
 
 </body>
 </html>
